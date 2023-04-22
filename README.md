@@ -39,7 +39,7 @@ The requirements given in the assignment are added here, for clarity:
 
 In addition to the given requirements, this project also has its own requirements:
 
-- **Instrument audio playback**: When navigating in Banga, the customer can choose to listen to the instrument he has interest in buying. The application will then play a sample of the musical instrument displayed. The administrator provides the audio sample when registering the product, similar to how it is done with the product image.
+- **Instrument audio playback**: When navigating through Banga, the customers can choose to listen to the instrument they have interest in buying. The application will then play a sample of the musical instrument displayed. The administrator provides the audio sample when registering the product, similar to how it is done with the product image.
 
 ### Project Description
 
