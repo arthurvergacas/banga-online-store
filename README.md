@@ -47,9 +47,11 @@ In addition to the given requirements, this project also has its own requirement
 
 The project is a complete application that will use React in the front-end, Node and Express in the back-end, and Firebase's document-oriented database as the form of persisting data.
 
-The platform hosting media assets (such as product images and instrument audio samples) will be Cloudinary.
+The platform for hosting media assets (such as product images and instrument audio samples) will be Cloudinary.
 
 Both back and front-end will use Jest as their testing framework, while more general tests will be performed using Insomnia.
+
+The navigation diagram was made in Draw.io, while the page designs was made in Figma.
 
 ### Application Main Structure
 
@@ -71,6 +73,12 @@ Every page will also contain the application **Navigation Bar**, where the user 
 A **navigation diagram** describing the main flow of the application was made in Draw.io, and is presented below:
 
 ![image](planning-artifacts/Banga%20-%20Navigation%20Diagram.png)
+
+### Application Page Mockup
+
+The Figma designs for all the main pages in the application can be found here:
+
+- [**Banga's Figma**](https://www.figma.com/file/JF5Lv0DbSIgUlF9dmYGbQT/webproject?node-id=0%3A1&t=Ae8mqRndqE50Jtt1-1).
 
 ## Comments About the Code
 
