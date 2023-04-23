@@ -1,0 +1,106 @@
+#page-content main {
+  padding: 1.5em;
+}
+
+#product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#product-header h1 {
+  line-height: 1em;
+}
+
+#product-header h2 {
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
+  font-size: 1.25em;
+}
+
+#listen-product-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  width: min-content;
+
+  text-align: right;
+  font-size: 1.5em;
+}
+
+#listen-product-container button {
+  padding: 1em;
+
+  border-radius: 50%;
+
+  font-family: sans-serif;
+  font-size: 0.5em;
+}
+
+#listen-product-container button:active {
+  background-color: var(--light-brown);
+}
+
+#listen-product-container i {
+  font-size: 1.25em;
+  color: var(--dark-brown);
+}
+
+#product-content {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 2em;
+
+  margin-top: 1em;
+}
+
+#product-description {
+  font-size: 1.15em;
+}
+
+#product-content img {
+  width: clamp(13em, 35vw, 30em);
+  max-height: 25em;
+
+  object-fit: contain;
+
+  border-radius: 15px;
+}
+
+#product-content > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3em;
+}
+
+#product-buy-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0.25em;
+
+  align-self: center;
+
+  width: 10em;
+
+  font-family: 'Galindo', cursive;
+}
+
+#product-buy-button-container strong {
+  font-weight: 400;
+}
+
+#product-buy-button-container button {
+  background-color: var(--light-brown);
+  color: var(--white);
+
+  font-size: 1.25em;
+}
+
+#product-buy-button-container button:active {
+  background-color: var(--brown);
+}

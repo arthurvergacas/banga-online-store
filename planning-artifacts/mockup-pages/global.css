@@ -11,11 +11,12 @@
 html {
   --white: #ffffff;
   --black: #121619;
-  --brown: #7c6c77;
+  --brown: #5c585d;
   --accent-brown: #463240;
   --light-accent-brown: #64405a;
   --dark-brown: #3d383f;
-  --light-brown: #5c585d;
+  --light-brown: #7c6c77;
+  --lighter-brown: #d9d9d9;
 
   --navbar-height: 6em;
   --spacing-navbar-content: 4em;
@@ -46,6 +47,20 @@ a {
   text-decoration: none;
 }
 
+button {
+  padding: 0.75em 2.25em;
+
+  font-family: 'Galindo', cursive;
+  text-align: center;
+
+  border-radius: 90px;
+  border: none;
+
+  background-color: var(--lighter-brown);
+
+  cursor: pointer;
+}
+
 /* #region navbar */
 
 #navbar {
@@ -57,7 +72,7 @@ a {
 
   padding-inline: 2em;
 
-  background-color: var(--brown);
+  background-color: var(--light-brown);
 
   border-bottom-right-radius: 25px;
 }
