@@ -40,6 +40,11 @@ h6 {
   font-family: 'Sarala', sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* #region navbar */
 
 #navbar {
@@ -105,7 +110,7 @@ h6 {
 }
 
 #page-content main {
-  width: clamp(15em, 90vw, 60em);
+  width: clamp(15em, 90vw, 70em);
   min-height: calc(100vh - var(--navbar-height) - 2 * var(--spacing-navbar-content));
 
   margin-inline: auto;
