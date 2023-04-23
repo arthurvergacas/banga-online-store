@@ -105,7 +105,7 @@ h6 {
 }
 
 #page-content main {
-  width: max(10em, 90vw);
+  width: clamp(15em, 90vw, 60em);
   min-height: calc(100vh - var(--navbar-height) - 2 * var(--spacing-navbar-content));
 
   margin-inline: auto;
