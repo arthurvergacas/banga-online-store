@@ -15,12 +15,17 @@ html {
   --accent-brown: #463240;
   --dark-brown: #3d383f;
   --light-brown: #5c585d;
+
+  --navbar-height: 6em;
+  --spacing-navbar-content: 4em;
 }
 
 body {
   font-family: 'Work Sans', sans-serif;
 
   background-color: var(--black);
+
+  color: var(--white);
 }
 
 h1,
@@ -42,7 +47,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
 
-  height: 6em;
+  height: var(--navbar-height);
 
   padding-inline: 2em;
 
@@ -92,3 +97,23 @@ h6 {
 }
 
 /* #endregion navbar */
+
+/* #region page-cotent */
+
+#page-content {
+  margin-block: var(--spacing-navbar-content);
+}
+
+#page-content main {
+  width: max(10em, 90vw);
+  min-height: calc(100vh - var(--navbar-height) - 2 * var(--spacing-navbar-content));
+
+  margin-inline: auto;
+  padding: 3.125em;
+
+  background-color: var(--dark-brown);
+
+  border-radius: 8px;
+}
+
+/* #endregion */
