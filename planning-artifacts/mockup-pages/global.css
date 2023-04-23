@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*[aria-hidden='true'] {
+  display: none;
+}
+
+html {
+  --white: #ffffff;
+  --black: #121619;
+  --brown: #7c6c77;
+  --accent-brown: #463240;
+  --dark-brown: #3d383f;
+  --light-brown: #5c585d;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+
+  background-color: var(--black);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Galindo', cursive;
+}
+
+h4,
+h5,
+h6 {
+  font-family: 'Sarala', sans-serif;
+}
