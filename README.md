@@ -61,7 +61,8 @@ The application's main structure will consist of the following screens:
 - **Login/Sign Up**: The user can either login into the application using their email and password or choose to create a new account, where they can provide additional personal information.
 - **Product**: Upon selecting a product, the customers will be directed to its details page. There, they will have access to a brief product description, the product image, a sample of its sound, and the buy button.
 - **Cart**: On this page, the user has access to all the products they added to the cart, and can choose to finish the purchase.
-- **Checkout**: On this page, the user can provide their credit card information to finish the purchase.
+- **Payment**: On this page, the user can provide their credit card information to finish the purchase.
+- **Post Sale**: A purchase confirmation is presented to the users, who can then return to the home page.
 - **Profile**: Where the information stored about the customer is displayed. If the user is an administrator, additional management options are displayed.
 - **Product/Account Backoffice**: On these pages, the administrator will be able to access all the products and users registered on the system.
 - **Product/Account Editing**: Upon selecting a product or user on its respective page, the administrator will be directed to the editing page, where they will be able to modify data such as individual product and user info, product quantity in stock, as well as be able to delete any particular record.
