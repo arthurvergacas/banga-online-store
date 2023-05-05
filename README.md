@@ -4,6 +4,11 @@
 
 ## Online Store Assignment | SCC0219 - Introdução ao Desenvolvimento Web
 
+### Students
+
+- **Arthur Vergaças** | **Número USP:** 12542672
+- **Benício Januário** | **Número USP:** 12543843
+
 **Banga** is an innovative online store that offers a wide range of high-quality music instruments for musicians of all levels. What sets Banga apart from other music instrument stores is its unique feature that allows users to listen to the instruments they are interested in purchasing. With Banga's audio database powered by user uploads, customers can get a real feel for the sound and tone of each instrument before making a purchase. Whether it's a guitar, keyboard, drum set, or any other musical instrument, Banga's immersive listening experience provides customers with the confidence and assurance they need to make an informed decision. Combined with a user-friendly website and a vast selection of instruments from renowned brands, Banga is the go-to online store for musicians who want to hear the difference before they buy.
 
 ## Requirements
