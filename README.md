@@ -86,6 +86,8 @@ The Figma designs for all the main pages in the application can be found here:
 
 - [**Banga's Figma**](https://www.figma.com/file/JF5Lv0DbSIgUlF9dmYGbQT/webproject?node-id=0%3A1&t=Ae8mqRndqE50Jtt1-1).
 
+In addition to the Figma designs, you can find the HTML & CSS for **Home**, **Product details** and **Profile** mockup pages [here](https://github.com/arthurvergacas/banga-online-store/tree/main/planning-artifacts/mockup-pages).
+
 ## Comments About the Code
 
 ## Test Plan
