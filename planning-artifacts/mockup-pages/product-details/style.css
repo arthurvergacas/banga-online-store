@@ -85,7 +85,7 @@
 
   align-self: center;
 
-  width: 10em;
+  width: fit-content;
 
   font-family: 'Galindo', cursive;
 }
@@ -99,6 +99,8 @@
   color: var(--white);
 
   font-size: 1.25em;
+
+  padding: 0.75em 1.75em;
 }
 
 #product-buy-button-container button:active {
