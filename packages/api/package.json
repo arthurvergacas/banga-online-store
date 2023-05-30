@@ -1,0 +1,15 @@
+{
+  "name": "@banga/api",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@banga/types": "file:../types"
+  },
+  "description": "Banga API",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo \"Error: no start specified\""
+  },
+  "author": "",
+  "license": "ISC"
+}
