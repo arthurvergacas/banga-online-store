@@ -1,0 +1,28 @@
+{
+  "name": "banga",
+  "version": "1.0.0",
+  "description": "Banga Online Store (Introduction to Web Development Assignment)",
+  "main": "index.js",
+  "scripts": {
+    "start:frontend": "npm start -w @banga/frontend",
+    "start:api": "npm start -w @banga/api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurvergacas/banga-online-store.git"
+  },
+  "author": "Arthur Vergaças (https://github.com/arthurvergacas); Benício Januário (https://github.com/benireni)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthurvergacas/banga-online-store/issues"
+  },
+  "homepage": "https://github.com/arthurvergacas/banga-online-store#readme",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
