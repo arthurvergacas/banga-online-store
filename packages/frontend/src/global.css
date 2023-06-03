@@ -56,3 +56,19 @@ button {
 
   cursor: pointer;
 }
+
+#pageContent {
+  margin-block: var(--spacing-navbar-content);
+}
+
+#pageContent main {
+  width: clamp(15em, 90vw, 70em);
+  min-height: calc(100vh - var(--navbar-height) - 2 * var(--spacing-navbar-content));
+
+  margin-inline: auto;
+  padding: 3.125em;
+
+  background-color: var(--dark-brown);
+
+  border-radius: 8px;
+}

@@ -6,7 +6,12 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Outlet />
+
+      <div id="pageContent">
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
