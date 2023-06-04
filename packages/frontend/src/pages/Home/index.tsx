@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Product } from '@banga/types/product';
+import ProdutService from '../../services/productService';
+import Spinner from '../../components/Spinner';
+import ProductCard from './components/ProductCard';
 
 import styles from './Home.module.css';
-import { useEffect, useState } from 'react';
-import ProdutService from '../../services/productService';
-import { Product } from '@banga/types/product';
-import Spinner from '../../components/Spinner';
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>();
@@ -22,31 +22,7 @@ export default function Home() {
 
   return (
     <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
-      {productsLoading ? (
-        <Spinner />
-      ) : (
-        products?.map((product) => (
-          <Link to={`product/${product.id}`} className={styles.productCardLink} key={product.id}>
-            <div className={styles.productCard}>
-              <header>
-                <div>
-                  <h3>{product.title}</h3>
-                  <h4>{product.subtitle}</h4>
-                </div>
-
-                <strong>{product.price}</strong>
-              </header>
-
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-                className={styles.productImage}
-                onLoad={() => console.log(product.id)}
-              />
-            </div>
-          </Link>
-        ))
-      )}
+      {productsLoading ? <Spinner /> : products?.map((product) => <ProductCard product={product} key={product.id} />)}
     </div>
   );
 }
