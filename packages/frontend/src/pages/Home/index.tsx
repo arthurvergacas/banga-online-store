@@ -22,7 +22,11 @@ export default function Home() {
 
   return (
     <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
-      {productsLoading ? <Spinner /> : products?.map((product) => <ProductCard product={product} key={product.id} />)}
+      {productsLoading ? (
+        <Spinner size="max(5em, 30%)" />
+      ) : (
+        products?.map((product) => <ProductCard product={product} key={product.id} />)
+      )}
     </div>
   );
 }
