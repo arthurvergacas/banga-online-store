@@ -1,6 +1,9 @@
 export interface Product {
   id: string;
-  name: string;
+  title: string;
+  subtitle: string;
+  price: number;
+  imageUrl: string;
 }
 
 export type ProductRequest = Omit<Product, 'id'>;
