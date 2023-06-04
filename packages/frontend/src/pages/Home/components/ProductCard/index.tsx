@@ -1,13 +1,17 @@
 import { Product } from '@banga/types/product';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import styles from './ProductCard.module.css';
+import Spinner from '../../../../components/Spinner';
 
 export interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [imageLoading, setImageLoading] = useState(true);
+
   return (
     <Link to={`product/${product.id}`} className={styles.productCardLink}>
       <div className={styles.productCard}>
@@ -20,11 +24,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           <strong>{product.price}</strong>
         </header>
 
+        {imageLoading && (
+          <div className={styles.productImageSpinnerContainer}>
+            <Spinner />
+          </div>
+        )}
+
         <img
           src={product.imageUrl}
           alt={product.title}
           className={styles.productImage}
-          onLoad={() => console.log(product.id)}
+          style={{ display: imageLoading ? 'none' : 'block' }}
+          onLoad={() => setImageLoading(false)}
         />
       </div>
     </Link>

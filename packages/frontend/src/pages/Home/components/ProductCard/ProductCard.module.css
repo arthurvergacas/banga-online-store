@@ -55,6 +55,11 @@
   width: 100%;
 }
 
+.productImageSpinnerContainer {
+  height: inherit;
+  margin-top: 3.75em;
+}
+
 .productCard .productImage {
   height: 9.75em;
   max-width: 100%;
