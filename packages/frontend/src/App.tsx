@@ -4,7 +4,7 @@ import './global.css';
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
 
       <div id="pageContent">
@@ -12,7 +12,7 @@ function App() {
           <Outlet />
         </main>
       </div>
-    </div>
+    </>
   );
 }
 
