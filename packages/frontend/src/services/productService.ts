@@ -9,7 +9,7 @@ const mockProducts: Product[] = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies, dui a accumsan cursus, libero ipsum sollicitudin nibh, eget mollis dolor lacus vel odio. Nullam cursus sem elit, et tincidunt purus laoreet id. Donec nec lorem in magna tristique congue at ullamcorper dui. Praesent non urna vel velit condimentum fringilla quis a dolor. Aliquam commodo, risus ut semper rhoncus, nulla ligula maximus lorem, id aliquam sem felis sed risus. Curabitur maximus tellus eu ex varius vulputate. Nam pellentesque felis a lorem pulvinar, et gravida lectus lacinia. Maecenas ac enim nisi. Phasellus a convallis ex, at malesuada justo.',
     price: 32.99,
-    imageUrl: 'https://picsum.photos/400/500',
+    imageUrl: 'https://picsum.photos/1100/700',
   },
   {
     id: Math.floor(Math.random() * 1000).toString(),
@@ -18,7 +18,7 @@ const mockProducts: Product[] = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies, dui a accumsan cursus, libero ipsum sollicitudin nibh, eget mollis dolor lacus vel odio. Nullam cursus sem elit, et tincidunt purus laoreet id. Donec nec lorem in magna tristique congue at ullamcorper dui. Praesent non urna vel velit condimentum fringilla quis a dolor. Aliquam commodo, risus ut semper rhoncus, nulla ligula maximus lorem, id aliquam sem felis sed risus. Curabitur maximus tellus eu ex varius vulputate. Nam pellentesque felis a lorem pulvinar, et gravida lectus lacinia. Maecenas ac enim nisi. Phasellus a convallis ex, at malesuada justo.',
     price: 32.99,
-    imageUrl: 'https://picsum.photos/500/400',
+    imageUrl: 'https://picsum.photos/900/1100',
   },
   {
     id: Math.floor(Math.random() * 1000).toString(),
@@ -27,7 +27,7 @@ const mockProducts: Product[] = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies, dui a accumsan cursus, libero ipsum sollicitudin nibh, eget mollis dolor lacus vel odio. Nullam cursus sem elit, et tincidunt purus laoreet id. Donec nec lorem in magna tristique congue at ullamcorper dui. Praesent non urna vel velit condimentum fringilla quis a dolor. Aliquam commodo, risus ut semper rhoncus, nulla ligula maximus lorem, id aliquam sem felis sed risus. Curabitur maximus tellus eu ex varius vulputate. Nam pellentesque felis a lorem pulvinar, et gravida lectus lacinia. Maecenas ac enim nisi. Phasellus a convallis ex, at malesuada justo.',
     price: 32.99,
-    imageUrl: 'https://picsum.photos/300/400',
+    imageUrl: 'https://picsum.photos/1000/700',
   },
   {
     id: Math.floor(Math.random() * 1000).toString(),
@@ -36,7 +36,7 @@ const mockProducts: Product[] = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies, dui a accumsan cursus, libero ipsum sollicitudin nibh, eget mollis dolor lacus vel odio. Nullam cursus sem elit, et tincidunt purus laoreet id. Donec nec lorem in magna tristique congue at ullamcorper dui. Praesent non urna vel velit condimentum fringilla quis a dolor. Aliquam commodo, risus ut semper rhoncus, nulla ligula maximus lorem, id aliquam sem felis sed risus. Curabitur maximus tellus eu ex varius vulputate. Nam pellentesque felis a lorem pulvinar, et gravida lectus lacinia. Maecenas ac enim nisi. Phasellus a convallis ex, at malesuada justo.',
     price: 32.99,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl: 'https://picsum.photos/800/1000',
   },
 ];
 
