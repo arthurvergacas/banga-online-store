@@ -12,6 +12,7 @@
 @media (max-width: 500px) {
   #listenProductContainer {
     width: 100%;
+    justify-content: space-between;
 
     text-align: left;
     margin-block: 1em;
