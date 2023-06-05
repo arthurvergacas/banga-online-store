@@ -23,6 +23,7 @@ export default function Image(props: ImageProps) {
       <img
         src={props.src}
         alt={props.alt}
+        loading="lazy"
         className={props.imgClassName}
         style={{ display: imageLoading ? 'none' : undefined }}
         onLoad={() => setImageLoading(false)}
