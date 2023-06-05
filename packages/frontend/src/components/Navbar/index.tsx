@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import largeLogo from '../../assets/img/logo-large-transparent.png';
-import smallLogo from '../../assets/img/logo-small.png';
+import largeLogo from 'assets/img/logo-large-transparent.png';
+import smallLogo from 'assets/img/logo-small.png';
 import styles from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 

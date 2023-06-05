@@ -2,7 +2,7 @@ import { Product } from '@banga/types/product';
 import { Link } from 'react-router-dom';
 
 import styles from './ProductCard.module.css';
-import Image from '../../../../components/Image';
+import Image from 'components/Image';
 
 export interface ProductCardProps {
   product: Product;

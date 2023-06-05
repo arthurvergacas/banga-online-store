@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Spinner from '../Spinner';
+import Spinner from 'components/Spinner';
 
 interface ImageProps {
   src: string;
