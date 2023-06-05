@@ -62,6 +62,7 @@ button {
 }
 
 #pageContent main {
+  position: relative;
   width: clamp(15em, 90vw, 70em);
   min-height: calc(100vh - var(--navbar-height) - 2 * var(--spacing-navbar-content));
 

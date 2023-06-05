@@ -1,0 +1,95 @@
+.container {
+  padding: 1.5em;
+}
+
+#productHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#productHeader h1 {
+  line-height: 1em;
+}
+
+#productHeader h2 {
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
+  font-size: 1.25em;
+}
+
+#productContent {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 2em;
+
+  margin-top: 1em;
+}
+
+#productDescription {
+  font-size: 1.15em;
+}
+
+#imgContainer {
+  display: flex;
+  flex-shrink: 0;
+
+  width: 45%;
+}
+
+#imgContainer > * {
+  width: 100%;
+}
+
+#imgContainer img {
+  object-fit: contain;
+  border-radius: 15px;
+}
+
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinnerContainer svg {
+  max-height: 5rem;
+}
+
+#productContent > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 3em;
+}
+
+#productBuyButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0.25em;
+
+  align-self: center;
+
+  width: 10em;
+
+  font-family: 'Galindo', cursive;
+}
+
+#productBuyButtonContainer strong {
+  font-weight: 400;
+}
+
+#productBuyButtonContainer button {
+  background-color: var(--light-brown);
+  color: var(--white);
+
+  font-size: 1.25em;
+}
+
+#productBuyButtonContainer button:active {
+  background-color: var(--brown);
+}
