@@ -2,7 +2,7 @@ import Image from 'components/Image';
 
 import styles from './Product.module.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ProductService from 'services/productService';
 import { Product } from '@banga/types/product';
 import Spinner from 'components/Spinner';
@@ -13,18 +13,23 @@ export default function ProductDetails() {
   const [productLoading, setProductLoading] = useState(true);
 
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProduct = async () => {
-      if (productId) {
+      if (productId && !product) {
         setProductLoading(true);
+        const fetchedProduct = await ProductService.getById(productId);
+
+        if (fetchedProduct == null) navigate('/');
+
         setProduct(await ProductService.getById(productId));
         setProductLoading(false);
       }
     };
 
     getProduct();
-  }, [productId]);
+  }, [productId, product, navigate]);
 
   if (productLoading) {
     return (
