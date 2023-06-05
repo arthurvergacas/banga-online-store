@@ -1,6 +1,6 @@
 import Image from 'components/Image';
 
-import styles from './Product.module.css';
+import styles from './ProductDetails.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProductService from 'services/productService';
