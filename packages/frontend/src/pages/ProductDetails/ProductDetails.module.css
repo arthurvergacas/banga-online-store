@@ -2,10 +2,22 @@
   padding: 1.5em;
 }
 
+@media (max-width: 500px) {
+  .container {
+    padding: 0;
+  }
+}
+
 #productHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+@media (max-width: 500px) {
+  #productHeader {
+    flex-direction: column;
+  }
 }
 
 #productHeader h1 {
@@ -27,6 +39,12 @@
   margin-top: 1em;
 }
 
+@media (max-width: 1000px) {
+  #productContent {
+    flex-direction: column-reverse;
+  }
+}
+
 #productDescription {
   text-align: justify;
   font-size: 1.15em;
@@ -37,6 +55,12 @@
   flex-shrink: 0;
 
   width: 45%;
+}
+
+@media (max-width: 1000px) {
+  #imgContainer {
+    width: 100%;
+  }
 }
 
 #imgContainer > * {
