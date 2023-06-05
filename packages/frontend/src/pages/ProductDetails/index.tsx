@@ -50,7 +50,7 @@ export default function ProductDetails() {
           <h2>{product?.subtitle}</h2>
         </header>
 
-        <PlayInstrument />
+        <PlayInstrument audioUrl={product!.audioUrl} />
       </div>
 
       <section id={styles.productContent}>

@@ -5,6 +5,7 @@ export interface Product {
   description: string;
   price: number;
   imageUrl: string;
+  audioUrl: string;
 }
 
 export type ProductRequest = Omit<Product, 'id'>;
