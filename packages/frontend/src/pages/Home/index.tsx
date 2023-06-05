@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '@banga/types/product';
-import ProdutService from 'services/productService';
+import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
 import ProductCard from './components/ProductCard';
 
@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const getProducts = async () => {
       setProductsLoading(true);
-      setProducts(await ProdutService.getAll());
+      setProducts(await ProductService.getAll());
       setProductsLoading(false);
     };
 

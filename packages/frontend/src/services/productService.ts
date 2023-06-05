@@ -32,7 +32,7 @@ const mockProducts: Product[] = [
   },
 ];
 
-const ProdutService = {
+const ProductService = {
   getAll: async (): Promise<Product[]> => {
     // TODO read from local storage
     await sleep();
@@ -51,4 +51,4 @@ const ProdutService = {
   },
 };
 
-export default ProdutService;
+export default ProductService;
