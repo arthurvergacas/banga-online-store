@@ -5,10 +5,13 @@ import styles from './Profile.module.css';
 import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
 import Button from 'components/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
   const [user, setUser] = useState<User>();
   const [userLoading, setUserLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async () => {
@@ -17,8 +20,12 @@ export default function Profile() {
       setUserLoading(false);
     };
 
-    getUser();
-  }, []);
+    if (UserService.isUserLoggedIn()) {
+      getUser();
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   if (userLoading) {
     return (
