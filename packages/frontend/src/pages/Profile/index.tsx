@@ -4,6 +4,7 @@ import { User } from '@banga/types/user';
 import styles from './Profile.module.css';
 import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
+import Button from 'components/Button';
 
 export default function Profile() {
   const [user, setUser] = useState<User>();
@@ -65,8 +66,8 @@ export default function Profile() {
         </div>
 
         <div id={styles.adminButtonsContainer}>
-          <button>Gerenciar Contas</button>
-          <button>Gerenciar Produtos</button>
+          <Button>Gerenciar Contas</Button>
+          <Button>Gerenciar Produtos</Button>
         </div>
       </div>
     </div>

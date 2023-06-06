@@ -7,6 +7,7 @@ import ProductService from 'services/productService';
 import { Product } from '@banga/types/product';
 import Spinner from 'components/Spinner';
 import PlayInstrument from './components/PlayInstrument';
+import Button from 'components/Button';
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<Product>();
@@ -59,7 +60,7 @@ export default function ProductDetails() {
 
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price}</strong>
-            <button type="button">COMPRAR</button>
+            <Button>COMPRAR</Button>
           </div>
         </div>
 
