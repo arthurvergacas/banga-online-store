@@ -1,0 +1,33 @@
+#container header {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 2em;
+}
+
+#container h1 {
+  line-height: 0.85em;
+}
+
+#container h2 {
+  font-family: 'Work Sans', sans-serif;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+}
+
+#container section ~ section {
+  margin-top: 2.25em;
+}
+
+.profileRow {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileRow ~ .profileRow {
+  margin-top: 1.75em;
+}
+
+#container address {
+  font-style: normal;
+}
