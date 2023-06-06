@@ -46,19 +46,16 @@ const mockProducts: Product[] = [
 
 const ProductService = {
   getAll: async (): Promise<Product[]> => {
-    // TODO read from local storage
     await sleep();
     return mockProducts;
   },
 
   getById: async (productId: Product['id']): Promise<Product | undefined> => {
-    // TODO read from local storage
     await sleep();
     return mockProducts.find((product) => product.id === productId);
   },
 
   createProduct: async (product: ProductRequest): Promise<void> => {
-    // TODO store in local storage
     await sleep();
   },
 };
