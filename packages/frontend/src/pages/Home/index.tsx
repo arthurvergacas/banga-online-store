@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '@banga/types/product';
-import ProdutService from 'services/productService';
+import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
 import ProductCard from './components/ProductCard';
 
@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const getProducts = async () => {
       setProductsLoading(true);
-      setProducts(await ProdutService.getAll());
+      setProducts(await ProductService.getAll());
       setProductsLoading(false);
     };
 
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (
-        <Spinner size="max(5em, 30%)" />
+        <Spinner size="30%" />
       ) : (
         products?.map((product) => <ProductCard product={product} key={product.id} />)
       )}

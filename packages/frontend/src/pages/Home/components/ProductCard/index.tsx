@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <h4>{product.subtitle}</h4>
           </div>
 
-          <strong>{product.price}</strong>
+          <strong>R$ {product.price}</strong>
         </header>
 
         <Image
