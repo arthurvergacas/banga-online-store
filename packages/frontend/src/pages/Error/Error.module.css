@@ -1,0 +1,23 @@
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  align-items: center;
+}
+
+.container a {
+  font-size: 1.2rem;
+
+  color: var(--light-accent-brown);
+  transition: color 0.1s ease-in;
+}
+
+.container a:hover {
+  color: var(--accent-brown);
+}
