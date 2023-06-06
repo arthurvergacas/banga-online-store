@@ -1,34 +1,64 @@
+import { useEffect, useState } from 'react';
+import { User } from '@banga/types/user';
+
 import styles from './Profile.module.css';
+import UserService from 'services/userService';
+import Spinner from 'components/Spinner';
 
 export default function Profile() {
+  const [user, setUser] = useState<User>();
+  const [userLoading, setUserLoading] = useState(true);
+
+  useEffect(() => {
+    const getUser = async () => {
+      setUserLoading(true);
+      setUser(await UserService.getUserData());
+      setUserLoading(false);
+    };
+
+    getUser();
+  }, []);
+
+  if (userLoading) {
+    return (
+      <div
+        className={styles.container}
+        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+      >
+        <Spinner size="5em" />
+      </div>
+    );
+  }
+
   return (
     <div id={styles.container}>
       <header>
         <div>
-          <h1>Artheni Januer</h1>
-          <span>arth.janu@usp.br</span>
+          <h1>{user?.name}</h1>
+          <span>{user?.email}</span>
         </div>
 
-        <span>+55 (16) 98765-4321</span>
+        <span>{user?.phone}</span>
       </header>
 
       <section>
         <h2>Dados Pessoais</h2>
         <div className={styles.profileRow}>
-          <span>CPF: 123.321.123-12</span>
-          <span>RG: 12.123.123-1</span>
+          <span>CPF: {user?.cpf}</span>
+          <span>RG: {user?.rg}</span>
         </div>
 
         <div className={styles.profileRow}>
           <span>
-            Data de nascimento: <time dateTime="2003-03-21">21/03/2003</time>
+            Data de nascimento:{' '}
+            <time dateTime={user?.birthDate.toDateString()}>{user?.birthDate.toLocaleDateString()}</time>
           </span>
         </div>
       </section>
 
       <section>
         <h2>Endereço de entrega</h2>
-        <address>Rua XIX de Abril, 2023</address>
+        <address>{user?.address}</address>
       </section>
     </div>
   );
