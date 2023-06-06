@@ -3,6 +3,7 @@ import App from '../App';
 import Home from 'pages/Home';
 import Error from 'pages/Error';
 import ProductDetails from 'pages/ProductDetails';
+import Profile from 'pages/Profile';
 
 export default function Router() {
   const router = createBrowserRouter(
@@ -11,7 +12,7 @@ export default function Router() {
         <Route index element={<Home />} />
 
         <Route path="/cart" />
-        <Route path="/profile" />
+        <Route path="/profile" element={<Profile />} />
 
         <Route path="/product/:productId" element={<ProductDetails />} />
       </Route>
