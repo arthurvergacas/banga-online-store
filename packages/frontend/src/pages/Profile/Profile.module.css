@@ -5,6 +5,13 @@
   margin-bottom: 2em;
 }
 
+@media (max-width: 500px) {
+  #container header {
+    flex-direction: column;
+    gap: 0.75em;
+  }
+}
+
 #container h1 {
   line-height: 0.85em;
 }
@@ -35,6 +42,13 @@
 #profileContent {
   display: flex;
   justify-content: space-between;
+  gap: 2em;
+}
+
+@media (max-width: 500px) {
+  #profileContent {
+    flex-direction: column;
+  }
 }
 
 #adminButtonsContainer {
