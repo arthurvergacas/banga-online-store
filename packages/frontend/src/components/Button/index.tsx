@@ -1,8 +1,12 @@
 import styles from './Button.module.css';
 
-export default function Button({ children }: React.PropsWithChildren) {
+interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset' | undefined;
+}
+
+export default function Button({ children, type }: React.PropsWithChildren<ButtonProps>) {
   return (
-    <button type="button" id={styles.btn}>
+    <button type={type ?? 'button'} id={styles.btn}>
       {children}
     </button>
   );
