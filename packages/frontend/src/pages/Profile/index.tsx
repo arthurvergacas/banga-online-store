@@ -41,25 +41,34 @@ export default function Profile() {
         <span>{user?.phone}</span>
       </header>
 
-      <section>
-        <h2>Dados Pessoais</h2>
-        <div className={styles.profileRow}>
-          <span>CPF: {user?.cpf}</span>
-          <span>RG: {user?.rg}</span>
+      <div id={styles.profileContent}>
+        <div>
+          <section>
+            <h2>Dados Pessoais</h2>
+            <div className={styles.profileRow}>
+              <span>CPF: {user?.cpf}</span>
+              <span>RG: {user?.rg}</span>
+            </div>
+
+            <div className={styles.profileRow}>
+              <span>
+                Data de nascimento:{' '}
+                <time dateTime={user?.birthDate.toDateString()}>{user?.birthDate.toLocaleDateString()}</time>
+              </span>
+            </div>
+          </section>
+
+          <section>
+            <h2>Endereço de entrega</h2>
+            <address>{user?.address}</address>
+          </section>
         </div>
 
-        <div className={styles.profileRow}>
-          <span>
-            Data de nascimento:{' '}
-            <time dateTime={user?.birthDate.toDateString()}>{user?.birthDate.toLocaleDateString()}</time>
-          </span>
+        <div id={styles.adminButtonsContainer}>
+          <button>Gerenciar Contas</button>
+          <button>Gerenciar Produtos</button>
         </div>
-      </section>
-
-      <section>
-        <h2>Endereço de entrega</h2>
-        <address>{user?.address}</address>
-      </section>
+      </div>
     </div>
   );
 }

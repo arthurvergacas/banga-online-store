@@ -31,3 +31,15 @@
 #container address {
   font-style: normal;
 }
+
+#profileContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+#adminButtonsContainer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1em;
+}
