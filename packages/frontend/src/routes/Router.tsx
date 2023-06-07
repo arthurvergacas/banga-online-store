@@ -8,6 +8,7 @@ import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
 import Cart from 'pages/Cart';
 import Payment from 'pages/Payment';
+import Checkout from 'pages/Checkout';
 
 export default function Router() {
   const router = createBrowserRouter(
@@ -20,6 +21,7 @@ export default function Router() {
 
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/checkout" element={<Checkout />} />
 
         <Route path="/profile" element={<Profile />} />
 
