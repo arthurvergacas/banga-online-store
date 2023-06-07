@@ -17,7 +17,7 @@
   gap: 2em;
 }
 
-#container small {
+#container > small {
   margin-top: 1em;
   text-align: center;
 }

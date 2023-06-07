@@ -58,7 +58,7 @@
 
 .errorMessage {
   position: absolute;
-  top: 90%;
+  top: 100%;
 
   font-size: 0.5em;
   color: var(--redish);
