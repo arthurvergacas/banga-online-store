@@ -25,7 +25,7 @@ const UserService = {
     return userSessionCreated;
   },
 
-  login: async (): Promise<void> => {
+  login: async (email: string, password: string): Promise<void> => {
     await sleep();
     userSessionCreated = true;
   },
