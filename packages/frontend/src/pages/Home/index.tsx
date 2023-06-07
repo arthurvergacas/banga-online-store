@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Product } from '@banga/types/product';
 import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
-import ProductCard from './components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 
 import styles from './Home.module.css';
 
