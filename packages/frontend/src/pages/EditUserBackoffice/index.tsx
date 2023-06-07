@@ -60,6 +60,7 @@ export default function EditUserBackoffice() {
     );
   }
 
+  // TODO isAdmin checkbox
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
