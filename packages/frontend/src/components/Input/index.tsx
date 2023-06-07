@@ -11,6 +11,8 @@ interface InputProps {
 
   useFormProps: UseFormReturn<any>;
   required?: boolean;
+  max?: string | number;
+  maxLenght?: number;
 }
 
 export default function Input({ useFormProps, ...props }: InputProps) {
@@ -34,7 +36,11 @@ export default function Input({ useFormProps, ...props }: InputProps) {
             type={props.type ?? 'text'}
             id={props.name}
             placeholder={props.placeholder}
-            {...useFormProps.control.register(props.name, { required: props.required })}
+            {...useFormProps.control.register(props.name, {
+              required: props.required,
+              max: props.max,
+              maxLength: props.maxLenght,
+            })}
           />
         </div>
 
