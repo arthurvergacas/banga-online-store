@@ -1,6 +1,6 @@
 .userCard {
   --badge-width: 1.5em;
-  --inline-padding: 0.5em;
+  --inline-padding: 0.75em;
 
   position: relative;
 
@@ -14,6 +14,14 @@
   background-color: var(--brown);
 
   border-radius: 15px;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  transition: transform 0.15s ease-out;
+}
+
+.userCard:hover {
+  transform: scale(105%);
 }
 
 .userCard header {
