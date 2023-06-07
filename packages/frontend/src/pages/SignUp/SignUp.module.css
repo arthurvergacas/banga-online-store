@@ -4,7 +4,7 @@
   align-items: center;
 
   margin: auto;
-  width: max(70%, 15em);
+  width: max(80%, 15em);
 }
 
 .loginForm {
@@ -17,9 +17,36 @@
   gap: 2em;
 }
 
+.loginForm input[type='date'] {
+  font-family: inherit;
+}
+
 .errorMessage {
   color: var(--redish);
   text-align: center;
 
   margin-top: -1em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.row > * {
+  width: min(45%, 14em);
+}
+
+@media (max-width: 650px) {
+  .row {
+    flex-direction: column;
+
+    gap: 2em;
+  }
+
+  .row > * {
+    width: 100%;
+  }
 }

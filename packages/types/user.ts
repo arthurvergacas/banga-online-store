@@ -13,4 +13,6 @@ export interface UserResponse extends Omit<User, 'birthDate'> {
   birthDate: string;
 }
 
-export type UserRequest = Omit<User, 'isAdmin'>;
+export interface UserRequest extends Omit<User, 'isAdmin'> {
+  password: string;
+}

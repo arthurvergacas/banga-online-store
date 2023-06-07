@@ -7,6 +7,7 @@ interface InputProps {
   placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
   width?: string;
+  autoComplete?: string;
 
   useFormProps: UseFormReturn<any>;
   required?: boolean;
@@ -29,6 +30,7 @@ export default function Input({ useFormProps, ...props }: InputProps) {
         {props.label}
         <div className={styles.inputContainer}>
           <input
+            autoComplete={props.autoComplete}
             type={props.type ?? 'text'}
             id={props.name}
             placeholder={props.placeholder}
