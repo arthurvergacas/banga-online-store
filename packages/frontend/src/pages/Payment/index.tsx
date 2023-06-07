@@ -6,9 +6,11 @@ import Button from 'components/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import paymentService from 'services/paymentService';
+import Spinner from 'components/Spinner';
 
 export default function Payment() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLoadingPayment, setIsLoadingPayment] = useState(false);
 
   const useFormProps = useForm<PaymentType>({ mode: 'onChange' });
 
@@ -16,7 +18,9 @@ export default function Payment() {
 
   const onSubmit = async (data: PaymentType) => {
     try {
+      setIsLoadingPayment(true);
       await paymentService.pay(data);
+      setIsLoadingPayment(false);
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
@@ -40,7 +44,7 @@ export default function Payment() {
             required
             name="cardNumber"
             type="text"
-            placeholder="ex.: João Maria da Silva"
+            placeholder="Número do cartão"
           />
 
           <Input
@@ -59,7 +63,9 @@ export default function Payment() {
           <Input label="CVV" useFormProps={useFormProps} required name="cvv" type="number" placeholder="XXX" />
         </div>
 
-        <Button type="submit">Finalizar Compra</Button>
+        <Button type="submit">
+          {isLoadingPayment ? <Spinner width="none" height="100%" /> : <>Finalizar Compra</>}
+        </Button>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>

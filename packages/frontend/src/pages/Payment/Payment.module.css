@@ -21,6 +21,11 @@
   font-family: inherit;
 }
 
+.form button {
+  height: 3em;
+  width: 14em;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
