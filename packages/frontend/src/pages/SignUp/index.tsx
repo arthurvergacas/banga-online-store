@@ -29,7 +29,7 @@ export default function SignUp() {
 
   return (
     <div className={styles.container}>
-      <form className={styles.loginForm} onSubmit={useFormProps.handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
         <h1>Cadastre-se</h1>
 
         <div className={styles.row}>

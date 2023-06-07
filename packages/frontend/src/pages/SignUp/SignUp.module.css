@@ -7,7 +7,7 @@
   width: max(80%, 15em);
 }
 
-.loginForm {
+.form {
   display: flex;
   flex-direction: column;
 
@@ -17,7 +17,7 @@
   gap: 2em;
 }
 
-.loginForm input[type='date'] {
+.form input[type='date'] {
   font-family: inherit;
 }
 
