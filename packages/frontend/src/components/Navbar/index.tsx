@@ -5,7 +5,6 @@ import largeLogo from 'assets/img/logo-large-transparent.png';
 import smallLogo from 'assets/img/logo-small.png';
 import styles from './Navbar.module.css';
 import { Link } from 'react-router-dom';
-import UserService from 'services/userService';
 
 export default function Navbar() {
   return (
@@ -23,7 +22,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to={UserService.isUserLoggedIn() ? '/profile' : '/login'}>
+          <Link to="/profile">
             <i aria-label="Profile">
               <FontAwesomeIcon icon={faUser} />
             </i>
