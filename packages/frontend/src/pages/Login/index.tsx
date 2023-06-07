@@ -1,5 +1,5 @@
 import Button from 'components/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Input from 'components/Input';
 import UserService from 'services/userService';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Login as LoginType } from '@banga/types/login';
 
 import styles from './Login.module.css';
+import { GuardedRouteState } from 'routes/GuardedRoute/guardedRouteState';
 
 interface LoginProps {
   onSuccessfulLogin: () => void;
@@ -16,6 +17,7 @@ export default function Login({ onSuccessfulLogin }: LoginProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const useFormProps = useForm<LoginType>({ mode: 'all' });
 
   const onSubmit = async (data: LoginType) => {
@@ -31,7 +33,7 @@ export default function Login({ onSuccessfulLogin }: LoginProps) {
 
     onSuccessfulLogin();
 
-    navigate('/profile');
+    navigate((location.state as GuardedRouteState).referer ?? '/profile');
   };
 
   useEffect(() => {
