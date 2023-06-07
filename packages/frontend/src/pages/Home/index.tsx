@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Product } from '@banga/types/product';
 import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
-import ProductCard from './components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 
 import styles from './Home.module.css';
 
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (
-        <Spinner size="30%" />
+        <Spinner width="30%" height="30%" />
       ) : (
         products?.map((product) => <ProductCard product={product} key={product.id} />)
       )}

@@ -6,6 +6,7 @@ import ProductDetails from 'pages/ProductDetails';
 import Profile from 'pages/Profile';
 import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
+import Cart from 'pages/Cart';
 
 export default function Router() {
   const router = createBrowserRouter(
@@ -16,7 +17,7 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
 
-        <Route path="/cart" />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
 
         <Route path="/product/:productId" element={<ProductDetails />} />

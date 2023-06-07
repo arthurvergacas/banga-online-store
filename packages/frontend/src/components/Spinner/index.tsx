@@ -1,5 +1,6 @@
 interface SpinnerProps {
-  size?: string | number;
+  width?: string | number;
+  height?: string | number;
   color?: string;
 }
 
@@ -10,8 +11,8 @@ export default function Spinner(props: SpinnerProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       style={{ margin: 'auto', background: 'none', display: 'block' }}
       shapeRendering="auto"
-      width={props.size || '50%'}
-      height={props.size || '50%'}
+      width={props.width || '50%'}
+      height={props.height || '50%'}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
     >

@@ -111,18 +111,5 @@
 }
 
 #productBuyButtonContainer button {
-  background-color: var(--light-brown);
-  color: var(--white);
-
-  font-size: 1.25em;
-
-  transition: background-color 0.15s ease-out;
-}
-
-#productBuyButtonContainer button:hover {
-  background-color: var(--brown);
-}
-
-#productBuyButtonContainer button:active {
-  background-color: var(--light-accent-brown);
+  width: max-content;
 }

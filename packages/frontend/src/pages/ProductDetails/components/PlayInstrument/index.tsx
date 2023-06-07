@@ -39,7 +39,7 @@ export default function PlayInstrument({ audioUrl }: PlayInstrumentProps) {
     if (isLoading) {
       return (
         <i aria-label="Carregando som do instrumento" style={{ fontSize: 'unset' }}>
-          <Spinner size="2em" />
+          <Spinner width="2em" height="2em" />
         </i>
       );
     }

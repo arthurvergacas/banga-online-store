@@ -10,7 +10,7 @@ export interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link to={`product/${product.id}`} className={styles.productCardLink}>
+    <Link to={`/product/${product.id}`} className={styles.productCardLink}>
       <div className={styles.productCard}>
         <header>
           <div>
@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <h4>{product.subtitle}</h4>
           </div>
 
-          <strong>R$ {product.price}</strong>
+          <strong>R$ {product.price.toLocaleString()}</strong>
         </header>
 
         <Image

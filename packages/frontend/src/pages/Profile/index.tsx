@@ -33,7 +33,7 @@ export default function Profile() {
         className={styles.container}
         style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
       >
-        <Spinner size="5em" />
+        <Spinner width="5em" height="5em" />
       </div>
     );
   }
