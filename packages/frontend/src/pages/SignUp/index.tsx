@@ -100,7 +100,7 @@ export default function SignUp() {
           />
         </div>
 
-        <Button type="submit">ENTRAR</Button>
+        <Button type="submit">CADASTRAR</Button>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
