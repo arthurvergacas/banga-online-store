@@ -16,16 +16,21 @@ export default function Router() {
       <Route path="/" element={<App />} errorElement={<Error />}>
         <Route index element={<Home />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="login" element={<Login />} />
+        <Route path="sign-up" element={<SignUp />} />
 
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="payment" element={<Payment />} />
+        <Route path="checkout" element={<Checkout />} />
 
-        <Route path="/profile" element={<Profile />} />
+        <Route path="profile" element={<Profile />} />
 
-        <Route path="/product/:productId" element={<ProductDetails />} />
+        <Route path="admin">
+          <Route path="products" />
+          <Route path="users" />
+        </Route>
+
+        <Route path="product/:productId" element={<ProductDetails />} />
       </Route>
     )
   );
