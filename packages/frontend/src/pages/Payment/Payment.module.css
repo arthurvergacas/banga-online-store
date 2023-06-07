@@ -31,3 +31,22 @@
 .row > * {
   width: min(45%, 14em);
 }
+
+@media (max-width: 864px) {
+  .row {
+    flex-direction: column;
+
+    gap: 2em;
+  }
+
+  .row > * {
+    width: 100%;
+  }
+}
+
+.errorMessage {
+  color: var(--redish);
+  text-align: center;
+
+  margin-top: -1em;
+}

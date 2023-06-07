@@ -3,13 +3,34 @@ import Input from 'components/Input';
 import styles from './Payment.module.css';
 import { useForm } from 'react-hook-form';
 import Button from 'components/Button';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import paymentService from 'services/paymentService';
 
 export default function Payment() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const useFormProps = useForm<PaymentType>({ mode: 'onChange' });
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: PaymentType) => {
+    try {
+      await paymentService.pay(data);
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+
+      return;
+    }
+
+    navigate('/checkout');
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
         <h1>Dados de pagamento</h1>
 
         <div className={styles.row}>
@@ -39,6 +60,8 @@ export default function Payment() {
         </div>
 
         <Button type="submit">Finalizar Compra</Button>
+
+        {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
     </div>
   );
