@@ -14,7 +14,7 @@ interface LoginInputValues {
 export default function Login() {
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<LoginInputValues>();
+  const useFormProps = useForm<LoginInputValues>({ mode: 'all' });
 
   const onSubmit = async (data: LoginInputValues) => {
     try {
@@ -30,14 +30,23 @@ export default function Login() {
 
   return (
     <div id={styles.container}>
-      <form id={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
+      <form id={styles.loginForm} onSubmit={useFormProps.handleSubmit(onSubmit)}>
         <h1>Login</h1>
 
-        <Input label="Email" register={register} name="email" type="email" placeholder="Email" width="min(80%, 18em)" />
+        <Input
+          label="Email"
+          useFormProps={useFormProps}
+          required
+          name="email"
+          type="email"
+          placeholder="Email"
+          width="min(80%, 18em)"
+        />
 
         <Input
           label="Senha"
-          register={register}
+          useFormProps={useFormProps}
+          required
           name="password"
           type="password"
           placeholder="Senha"

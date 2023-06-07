@@ -1,4 +1,6 @@
 .label {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 0.3em;
@@ -8,7 +10,7 @@
   font-size: 1.5rem;
 }
 
-:local .inputContainer {
+.inputContainer {
   position: relative;
   width: 100%;
 }
@@ -52,4 +54,12 @@
 
 .inputContainer input:focus {
   outline: none;
+}
+
+.errorMessage {
+  position: absolute;
+  top: 90%;
+
+  font-size: 0.5em;
+  color: var(--redish);
 }
