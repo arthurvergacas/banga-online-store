@@ -9,6 +9,7 @@ import SignUp from 'pages/SignUp';
 import Cart from 'pages/Cart';
 import Payment from 'pages/Payment';
 import Checkout from 'pages/Checkout';
+import UserBackoffice from 'pages/UserBackoffice';
 
 export default function Router() {
   const router = createBrowserRouter(
@@ -27,7 +28,7 @@ export default function Router() {
 
         <Route path="admin">
           <Route path="products" />
-          <Route path="users" />
+          <Route path="users" element={<UserBackoffice />} />
         </Route>
 
         <Route path="product/:productId" element={<ProductDetails />} />
