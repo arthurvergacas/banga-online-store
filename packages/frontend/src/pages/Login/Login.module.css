@@ -37,3 +37,10 @@
 #container a:active {
   color: var(--brown);
 }
+
+.errorMessage {
+  color: var(--redish);
+  text-align: center;
+
+  margin-top: -1em;
+}

@@ -5,6 +5,7 @@ import styles from './Login.module.css';
 import Input from 'components/Input';
 import UserService from 'services/userService';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 interface LoginInputValues {
   email: string;
@@ -12,16 +13,19 @@ interface LoginInputValues {
 }
 
 export default function Login() {
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const navigate = useNavigate();
   const useFormProps = useForm<LoginInputValues>({ mode: 'all' });
 
   const onSubmit = async (data: LoginInputValues) => {
     try {
       await UserService.login(data.email, data.password);
-    } catch {
-      // TODO mostrar umas mensagens de que não conseguiu fazer login
-      console.log('não consegui fazer login');
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+
       return;
     }
 
@@ -54,6 +58,8 @@ export default function Login() {
         />
 
         <Button type="submit">ENTRAR</Button>
+
+        {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
 
       <small>Esqueceu sua senha? Contate um administrador.</small>
