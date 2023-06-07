@@ -1,6 +1,7 @@
 .userCard {
   --badge-width: 1.5em;
   --inline-padding: 0.75em;
+  --card-border-radius: 15px;
 
   position: relative;
 
@@ -13,7 +14,7 @@
 
   background-color: var(--brown);
 
-  border-radius: 15px;
+  border-radius: var(--card-border-radius);
 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
@@ -46,6 +47,6 @@
   text-align: center;
   line-height: 1.5em;
 
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-right-radius: var(--card-border-radius);
+  border-bottom-right-radius: var(--card-border-radius);
 }
