@@ -2,6 +2,7 @@ import { User } from '@banga/types/user';
 
 export const mockUsers: User[] = [
   {
+    id: Math.floor(Math.random() * 1000).toString(),
     isAdmin: false,
     name: 'Mock User Name',
     email: 'mock@email.com',
@@ -12,6 +13,7 @@ export const mockUsers: User[] = [
     address: 'Rua XIX de Abril, 2023',
   },
   {
+    id: Math.floor(Math.random() * 1000).toString(),
     isAdmin: false,
     name: 'Mock User Name',
     email: 'mock@email.com',
@@ -22,6 +24,7 @@ export const mockUsers: User[] = [
     address: 'Rua XIX de Abril, 2023',
   },
   {
+    id: Math.floor(Math.random() * 1000).toString(),
     isAdmin: true,
     name: 'Mock User Name',
     email: 'mock@email.com',
