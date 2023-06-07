@@ -41,7 +41,7 @@ export default function Cart() {
         </span>
       )}
 
-      <Button onClick={() => navigate('/payment')}>Finalizar Compra</Button>
+      <Button onClick={() => navigate('/payment')}>Ir para o pagamento</Button>
     </div>
   );
 }
