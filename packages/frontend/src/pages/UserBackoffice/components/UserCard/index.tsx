@@ -1,15 +1,20 @@
 import { Link } from 'react-router-dom';
 import styles from './UserCard.module.css';
+import { User } from '@banga/types/user';
 
-export default function UserCard() {
+interface UserProps {
+  user: User;
+}
+
+export default function UserCard({ user }: UserProps) {
   return (
-    <Link to="id" className={styles.userCard}>
+    <Link to={user.id} className={styles.userCard}>
       <header>
-        <h3>Arthur Januher</h3>
-        <h4>arth.janu@usp.br</h4>
+        <h3>{user.name}</h3>
+        <h4>{user.email}</h4>
       </header>
 
-      <span>ADM</span>
+      {user.isAdmin && <span>ADM</span>}
     </Link>
   );
 }
