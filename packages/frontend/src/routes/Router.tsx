@@ -5,6 +5,7 @@ import Error from 'pages/Error';
 import ProductDetails from 'pages/ProductDetails';
 import Profile from 'pages/Profile';
 import Login from 'pages/Login';
+import SignUp from 'pages/SignUp';
 
 export default function Router() {
   const router = createBrowserRouter(
@@ -13,6 +14,7 @@ export default function Router() {
         <Route index element={<Home />} />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
 
         <Route path="/cart" />
         <Route path="/profile" element={<Profile />} />
