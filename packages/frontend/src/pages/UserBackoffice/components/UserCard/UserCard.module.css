@@ -1,0 +1,43 @@
+.userCard {
+  --badge-width: 1.5em;
+  --inline-padding: 0.5em;
+
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 0.25em var(--inline-padding);
+
+  background-color: var(--brown);
+
+  border-radius: 15px;
+}
+
+.userCard header {
+  margin-right: calc(var(--badge-width) - var(--inline-padding) + 0.25em);
+}
+
+.userCard span {
+  position: absolute;
+  top: 0;
+  left: calc(100% - var(--badge-width));
+
+  height: 100%;
+  width: var(--badge-width);
+
+  background-color: var(--lighter-brown);
+  color: var(--black);
+
+  font-size: 0.9rem;
+
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+  text-align: center;
+  line-height: 1.5em;
+
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
