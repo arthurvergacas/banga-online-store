@@ -4,8 +4,6 @@ import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
 import ProductCard from '../../components/ProductCard';
 
-import styles from './Home.module.css';
-
 export default function Home() {
   const [products, setProducts] = useState<Product[]>();
   const [productsLoading, setProductsLoading] = useState(true);
@@ -21,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
+    <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (
         <Spinner width="30%" height="30%" />
       ) : (

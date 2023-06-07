@@ -36,6 +36,7 @@ export default function Input({ useFormProps, ...props }: InputProps) {
             placeholder={props.placeholder}
             {...useFormProps.control.register(props.name, {
               required: props.required,
+              valueAsDate: props.type === 'date',
             })}
           />
         </div>

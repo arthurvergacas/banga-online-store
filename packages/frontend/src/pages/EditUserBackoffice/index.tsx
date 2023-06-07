@@ -1,42 +1,70 @@
-import { useForm } from 'react-hook-form';
-import styles from './SignUp.module.css';
-import { UserRequest } from '@banga/types/user';
 import Input from 'components/Input';
+import styles from './EditUserBackoffice.module.css';
+import { useForm } from 'react-hook-form';
+import { User, UserResponse } from '@banga/types/user';
+import { useEffect, useState } from 'react';
 import Button from 'components/Button';
+import { useNavigate, useParams } from 'react-router-dom';
 import UserService from 'services/userService';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Spinner from 'components/Spinner';
 
-interface SignUpProps {
-  onSuccessfulSignUp: () => void;
-}
-
-export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
+export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [userLoading, setUserLoading] = useState(true);
 
+  const useFormProps = useForm<UserResponse>({ mode: 'all' });
+
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const useFormProps = useForm<UserRequest>({ mode: 'all' });
 
-  const onSubmit = async (data: UserRequest) => {
+  useEffect(() => {
+    const populateFormWithUserData = (userData: User) => {
+      for (const key of Object.keys(userData) as (keyof UserResponse)[]) {
+        if (key === 'birthDate') useFormProps.setValue(key, userData[key].toString());
+        else useFormProps.setValue(key, userData[key]);
+      }
+    };
+
+    const getUser = async () => {
+      if (userId) {
+        setUserLoading(true);
+        const fetchedUser = await UserService.getById(userId);
+
+        if (fetchedUser == null) {
+          navigate('/');
+          return;
+        }
+
+        populateFormWithUserData(fetchedUser);
+        setUserLoading(false);
+      }
+    };
+
+    getUser();
+  }, [userId, navigate, useFormProps]);
+
+  const onSubmit = async (data: UserResponse) => {
     try {
-      await UserService.signUp(data);
+      await UserService.save(data);
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
-
-      return;
     }
-
-    onSuccessfulSignUp();
-
-    navigate('/profile');
   };
+
+  if (userLoading) {
+    return (
+      <div className={styles.container} style={{ height: '17em' }}>
+        <Spinner width="5em" height="5em" />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
-        <h1>Cadastre-se</h1>
+        <h1>Editar Usuário</h1>
 
         <div className={styles.row}>
           <Input
@@ -49,24 +77,12 @@ export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
             autoComplete="new-password"
           />
 
-          <Input
-            label="Senha"
-            useFormProps={useFormProps}
-            required
-            name="password"
-            type="password"
-            placeholder="******"
-            autoComplete="new-password"
-          />
-        </div>
-
-        <div className={styles.row}>
           <Input label="CPF" useFormProps={useFormProps} required name="cpf" type="text" placeholder="XXX.XXX.XXX-XX" />
-
-          <Input label="RG" useFormProps={useFormProps} required name="rg" type="text" placeholder="XX.XXX.XXX-X" />
         </div>
 
         <div className={styles.row}>
+          <Input label="RG" useFormProps={useFormProps} required name="rg" type="text" placeholder="XX.XXX.XXX-X" />
+
           <Input
             label="Email"
             useFormProps={useFormProps}
@@ -75,7 +91,9 @@ export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
             type="email"
             placeholder="example@email.com"
           />
+        </div>
 
+        <div className={styles.row}>
           <Input
             label="Nascimento"
             useFormProps={useFormProps}
@@ -84,9 +102,7 @@ export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
             type="date"
             placeholder="XX/XX/XXXX"
           />
-        </div>
 
-        <div className={styles.row}>
           <Input
             label="Endereço"
             useFormProps={useFormProps}
@@ -95,7 +111,9 @@ export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
             type="text"
             placeholder="Rua; número; cidade; estado"
           />
+        </div>
 
+        <div className={styles.row} style={{ justifyContent: 'center' }}>
           <Input
             label="Celular"
             useFormProps={useFormProps}
@@ -106,7 +124,7 @@ export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
           />
         </div>
 
-        <Button type="submit">CADASTRAR</Button>
+        <Button type="submit">Salvar</Button>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>

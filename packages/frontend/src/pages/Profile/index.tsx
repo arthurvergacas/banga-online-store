@@ -20,12 +20,8 @@ export default function Profile() {
       setUserLoading(false);
     };
 
-    if (UserService.isUserLoggedIn()) {
-      getUser();
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
+    getUser();
+  }, []);
 
   if (userLoading) {
     return (
@@ -74,8 +70,8 @@ export default function Profile() {
 
         {user?.isAdmin && (
           <div id={styles.adminButtonsContainer}>
-            <Button>Gerenciar Contas</Button>
-            <Button>Gerenciar Produtos</Button>
+            <Button onClick={() => navigate('/admin/users')}>Gerenciar Contas</Button>
+            <Button onClick={() => navigate('/admin/products')}>Gerenciar Produtos</Button>
           </div>
         )}
       </div>

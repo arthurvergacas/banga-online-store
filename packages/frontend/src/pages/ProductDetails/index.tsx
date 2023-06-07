@@ -36,7 +36,7 @@ export default function ProductDetails() {
 
         if (fetchedProduct == null) navigate('/');
 
-        setProduct(await ProductService.getById(productId));
+        setProduct(fetchedProduct);
         setProductLoading(false);
       }
     };
