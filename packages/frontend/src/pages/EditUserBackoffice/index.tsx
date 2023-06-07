@@ -1,7 +1,7 @@
 import Input from 'components/Input';
 import styles from './EditUserBackoffice.module.css';
 import { useForm } from 'react-hook-form';
-import { User, UserResponse } from '@banga/types/user';
+import { User } from '@banga/types/user';
 import { useEffect, useState } from 'react';
 import Button from 'components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -12,16 +12,15 @@ export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [userLoading, setUserLoading] = useState(true);
 
-  const useFormProps = useForm<UserResponse>({ mode: 'all' });
+  const useFormProps = useForm<User>({ mode: 'all' });
 
   const { userId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const populateFormWithUserData = (userData: User) => {
-      for (const key of Object.keys(userData) as (keyof UserResponse)[]) {
-        if (key === 'birthDate') useFormProps.setValue(key, userData[key].toString());
-        else useFormProps.setValue(key, userData[key]);
+      for (const key of Object.keys(userData) as (keyof User)[]) {
+        useFormProps.setValue(key, userData[key]);
       }
     };
 
@@ -31,7 +30,7 @@ export default function EditUserBackoffice() {
         const fetchedUser = await UserService.getById(userId);
 
         if (fetchedUser == null) {
-          navigate('/');
+          navigate('/admin/users');
           return;
         }
 
@@ -43,7 +42,7 @@ export default function EditUserBackoffice() {
     getUser();
   }, [userId, navigate, useFormProps]);
 
-  const onSubmit = async (data: UserResponse) => {
+  const onSubmit = async (data: User) => {
     try {
       await UserService.save(data);
     } catch (e) {
