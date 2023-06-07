@@ -10,6 +10,8 @@ const CartService = {
 
   addToCart: async (product: ProductRequest): Promise<void> => {
     await sleep();
+    const id = Math.floor(Math.random() * 1000).toString();
+    mockCartProducts.push({ id, ...product });
   },
 };
 
