@@ -13,7 +13,7 @@ import CartService from 'services/cartService';
 export default function ProductDetails() {
   const [product, setProduct] = useState<Product>();
   const [productLoading, setProductLoading] = useState(true);
-  const [addingProductToCart, setAddingProductToCart] = useState(true);
+  const [addingProductToCart, setAddingProductToCart] = useState(false);
 
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ export default function ProductDetails() {
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price.toLocaleString()}</strong>
             <Button onClick={addToCart} disabled={addingProductToCart}>
-              {addingProductToCart ? <Spinner width="10%" /> : <>ADICIONAR AO CARRINHO</>}
+              {addingProductToCart ? <Spinner width="10%" height="none" /> : <>ADICIONAR AO CARRINHO</>}
             </Button>
           </div>
         </div>
