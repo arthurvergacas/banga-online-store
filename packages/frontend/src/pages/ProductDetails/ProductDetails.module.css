@@ -111,6 +111,8 @@
 }
 
 #productBuyButtonContainer button {
+  width: max-content;
+
   background-color: var(--light-brown);
   color: var(--white);
 

@@ -60,7 +60,7 @@ export default function ProductDetails() {
 
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price}</strong>
-            <Button>COMPRAR</Button>
+            <Button>ADICIONAR AO CARRINHO</Button>
           </div>
         </div>
 
