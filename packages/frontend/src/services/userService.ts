@@ -1,4 +1,4 @@
-import { User } from '@banga/types/user';
+import { User, UserRequest } from '@banga/types/user';
 
 import sleep from './sleep';
 import { Login } from '@banga/types/login';
@@ -31,6 +31,12 @@ const UserService = {
 
     if (mockUser.email !== loginData.email || loginData.password !== '123')
       throw Error('Não foi possível realizar o login. Verifique seus dados e tente novamente.');
+
+    userSessionCreated = true;
+  },
+
+  signUp: async (signUpData: UserRequest): Promise<void> => {
+    await sleep();
 
     userSessionCreated = true;
   },
