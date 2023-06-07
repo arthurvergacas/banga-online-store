@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles.container} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (
-        <Spinner size="30%" />
+        <Spinner width="30%" height="30%" />
       ) : (
         products?.map((product) => <ProductCard product={product} key={product.id} />)
       )}

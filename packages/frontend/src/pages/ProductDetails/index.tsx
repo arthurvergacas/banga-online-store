@@ -8,13 +8,25 @@ import { Product } from '@banga/types/product';
 import Spinner from 'components/Spinner';
 import PlayInstrument from './components/PlayInstrument';
 import Button from 'components/Button';
+import CartService from 'services/cartService';
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<Product>();
   const [productLoading, setProductLoading] = useState(true);
+  const [addingProductToCart, setAddingProductToCart] = useState(true);
 
   const { productId } = useParams();
   const navigate = useNavigate();
+
+  const addToCart = async () => {
+    if (!product) return;
+
+    setAddingProductToCart(true);
+    await CartService.addToCart(product);
+    setAddingProductToCart(false);
+
+    navigate('/cart');
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -38,7 +50,7 @@ export default function ProductDetails() {
         className={styles.container}
         style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
       >
-        <Spinner size="5em" />
+        <Spinner width="5em" height="5em" />
       </div>
     );
   }
@@ -60,7 +72,9 @@ export default function ProductDetails() {
 
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price.toLocaleString()}</strong>
-            <Button>ADICIONAR AO CARRINHO</Button>
+            <Button onClick={addToCart} disabled={addingProductToCart}>
+              {addingProductToCart ? <Spinner width="10%" /> : <>ADICIONAR AO CARRINHO</>}
+            </Button>
           </div>
         </div>
 
