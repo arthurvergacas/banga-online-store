@@ -1,6 +1,7 @@
 import { User } from '@banga/types/user';
 
 import sleep from './sleep';
+import { Login } from '@banga/types/login';
 
 const mockUser: User = {
   isAdmin: true,
@@ -25,10 +26,10 @@ const UserService = {
     return userSessionCreated;
   },
 
-  login: async (email: string, password: string): Promise<void> => {
+  login: async (loginData: Login): Promise<void> => {
     await sleep();
 
-    if (mockUser.email !== email || password !== '123')
+    if (mockUser.email !== loginData.email || loginData.password !== '123')
       throw Error('Não foi possível realizar o login. Verifique seus dados e tente novamente.');
 
     userSessionCreated = true;

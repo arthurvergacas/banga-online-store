@@ -1,26 +1,22 @@
 import Button from 'components/Button';
 import { Link, useNavigate } from 'react-router-dom';
-
-import styles from './Login.module.css';
 import Input from 'components/Input';
 import UserService from 'services/userService';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { Login as LoginType } from '@banga/types/login';
 
-interface LoginInputValues {
-  email: string;
-  password: string;
-}
+import styles from './Login.module.css';
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  const useFormProps = useForm<LoginInputValues>({ mode: 'all' });
+  const useFormProps = useForm<LoginType>({ mode: 'all' });
 
-  const onSubmit = async (data: LoginInputValues) => {
+  const onSubmit = async (data: LoginType) => {
     try {
-      await UserService.login(data.email, data.password);
+      await UserService.login(data);
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
