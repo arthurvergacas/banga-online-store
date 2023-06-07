@@ -13,6 +13,7 @@ import UserBackoffice from 'pages/UserBackoffice';
 import { useState } from 'react';
 import UserService from 'services/userService';
 import GuardedRoute from './GuardedRoute';
+import EditUserBackoffice from 'pages/EditUserBackoffice';
 
 export default function Router() {
   const [userLoggedIn, setUserLoggedIn] = useState(UserService.isUserLoggedIn());
@@ -35,6 +36,7 @@ export default function Router() {
           <Route path="admin">
             <Route path="products" />
             <Route path="users" element={<UserBackoffice />} />
+            <Route path="users/:userId" element={<EditUserBackoffice />} />
           </Route>
         </Route>
 
