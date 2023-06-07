@@ -49,6 +49,10 @@ button {
   cursor: pointer;
 }
 
+input {
+  font-family: 'Work Sans', sans-serif;
+}
+
 #pageContent {
   margin-block: var(--spacing-navbar-content);
 }
