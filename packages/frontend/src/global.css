@@ -98,6 +98,8 @@ input[type='number'] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 2.5em;
+
+  width: 100%;
 }
 
 @media (max-width: 950px) {
