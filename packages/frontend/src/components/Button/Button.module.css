@@ -13,10 +13,16 @@
   transition: background-color 0.15s ease-out;
 }
 
-#btn:hover {
+#btn:hover:not(:disabled) {
   background-color: var(--brown);
 }
 
-#btn:active {
+#btn:active:not(:disabled) {
   background-color: var(--light-accent-brown);
+}
+
+#btn:disabled {
+  cursor: default;
+
+  color: var(--lighter-brown);
 }
