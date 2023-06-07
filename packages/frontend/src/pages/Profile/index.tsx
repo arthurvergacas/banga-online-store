@@ -20,12 +20,8 @@ export default function Profile() {
       setUserLoading(false);
     };
 
-    if (UserService.isUserLoggedIn()) {
-      getUser();
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
+    getUser();
+  }, []);
 
   if (userLoading) {
     return (

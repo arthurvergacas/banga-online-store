@@ -7,7 +7,11 @@ import UserService from 'services/userService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUp() {
+interface SignUpProps {
+  onSuccessfulSignUp: () => void;
+}
+
+export default function SignUp({ onSuccessfulSignUp }: SignUpProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -23,6 +27,8 @@ export default function SignUp() {
 
       return;
     }
+
+    onSuccessfulSignUp();
 
     navigate('/profile');
   };

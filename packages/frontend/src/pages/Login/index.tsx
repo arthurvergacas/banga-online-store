@@ -8,7 +8,11 @@ import { Login as LoginType } from '@banga/types/login';
 
 import styles from './Login.module.css';
 
-export default function Login() {
+interface LoginProps {
+  onSuccessfulLogin: () => void;
+}
+
+export default function Login({ onSuccessfulLogin }: LoginProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -24,6 +28,8 @@ export default function Login() {
 
       return;
     }
+
+    onSuccessfulLogin();
 
     navigate('/profile');
   };
