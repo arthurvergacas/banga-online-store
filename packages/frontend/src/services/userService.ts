@@ -1,4 +1,4 @@
-import { User, UserRequest } from '@banga/types/user';
+import { User, UserRequest, UserResponse } from '@banga/types/user';
 
 import sleep from './sleep';
 import { Login } from '@banga/types/login';
@@ -35,6 +35,16 @@ const UserService = {
     await sleep();
 
     return mockUsers;
+  },
+
+  getById: async (userId: string): Promise<User | undefined> => {
+    await sleep();
+
+    return mockUsers.find((user) => user.id === userId);
+  },
+
+  save: async (userData: UserResponse): Promise<void> => {
+    await sleep();
   },
 };
 
