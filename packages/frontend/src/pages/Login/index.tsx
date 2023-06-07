@@ -5,7 +5,7 @@ import styles from './Login.module.css';
 import Input from 'components/Input';
 import UserService from 'services/userService';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface LoginInputValues {
   email: string;
@@ -31,6 +31,10 @@ export default function Login() {
 
     navigate('/profile');
   };
+
+  useEffect(() => {
+    if (UserService.isUserLoggedIn()) navigate('/profile');
+  }, [navigate]);
 
   return (
     <div id={styles.container}>
