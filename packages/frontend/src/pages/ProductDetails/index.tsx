@@ -59,7 +59,7 @@ export default function ProductDetails() {
           <p id={styles.productDescription}>{product?.description}</p>
 
           <div id={styles.productBuyButtonContainer}>
-            <strong>R$ {product?.price}</strong>
+            <strong>R$ {product?.price.toLocaleString()}</strong>
             <Button>ADICIONAR AO CARRINHO</Button>
           </div>
         </div>
