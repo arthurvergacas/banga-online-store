@@ -1,4 +1,4 @@
-#label {
+.label {
   display: flex;
   flex-direction: column;
   gap: 0.3em;
@@ -8,12 +8,12 @@
   font-size: 1.5rem;
 }
 
-#inputContainer {
+:local .inputContainer {
   position: relative;
   width: 100%;
 }
 
-#inputContainer:focus-within::after {
+.inputContainer:focus-within::after {
   content: '';
   position: absolute;
   left: 0;
@@ -32,7 +32,7 @@
   }
 }
 
-#inputContainer input {
+.inputContainer input {
   padding: 0.2em;
 
   width: 100%;
@@ -46,10 +46,10 @@
   color: var(--white);
 }
 
-#inputContainer input::placeholder {
+.inputContainer input::placeholder {
   color: var(--black);
 }
 
-#inputContainer input:focus {
+.inputContainer input:focus {
   outline: none;
 }
