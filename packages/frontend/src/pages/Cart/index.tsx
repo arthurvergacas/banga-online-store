@@ -30,6 +30,7 @@ export default function Cart() {
   return (
     <div className={styles.container}>
       <h1>Carrinho</h1>
+
       <div className={styles.gridContainer} style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
         {productsLoading ? <Spinner /> : products?.map((product) => <ProductCard product={product} key={product.id} />)}
       </div>
