@@ -4,7 +4,7 @@
   align-items: center;
 
   margin: auto;
-  width: max(80%, 15em);
+  width: max(70%, 15em);
 }
 
 .form {
@@ -21,11 +21,9 @@
   font-family: inherit;
 }
 
-.errorMessage {
-  color: var(--redish);
-  text-align: center;
-
-  margin-top: -1em;
+.form button {
+  height: 3em;
+  width: 14em;
 }
 
 .row {
@@ -39,7 +37,7 @@
   width: min(45%, 14em);
 }
 
-@media (max-width: 650px) {
+@media (max-width: 864px) {
   .row {
     flex-direction: column;
 
@@ -49,4 +47,11 @@
   .row > * {
     width: 100%;
   }
+}
+
+.errorMessage {
+  color: var(--redish);
+  text-align: center;
+
+  margin-top: -1em;
 }

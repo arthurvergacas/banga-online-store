@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+
+  align-items: center;
+
+  width: max(80%, 13rem);
+
+  margin: auto;
+
+  text-align: center;
+}
+
+.container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.container p {
+  font-size: 1.2rem;
+
+  width: max(50%, 14rem);
+}
+
+@media (max-width: 500px) {
+  .container {
+    height: 28em;
+    justify-content: space-between;
+  }
+}

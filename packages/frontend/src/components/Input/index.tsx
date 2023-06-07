@@ -34,7 +34,9 @@ export default function Input({ useFormProps, ...props }: InputProps) {
             type={props.type ?? 'text'}
             id={props.name}
             placeholder={props.placeholder}
-            {...useFormProps.control.register(props.name, { required: props.required })}
+            {...useFormProps.control.register(props.name, {
+              required: props.required,
+            })}
           />
         </div>
 
