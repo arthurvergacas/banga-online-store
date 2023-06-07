@@ -1,0 +1,46 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: auto;
+  width: max(70%, 15em);
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  align-items: center;
+  gap: 2em;
+}
+
+#container > small {
+  margin-top: 1em;
+  text-align: center;
+}
+
+#container a {
+  margin-top: 2em;
+
+  text-decoration: underline;
+
+  transition: color 0.15s ease-out;
+}
+
+#container a:hover {
+  color: var(--lighter-brown);
+}
+
+#container a:active {
+  color: var(--brown);
+}
+
+.errorMessage {
+  color: var(--redish);
+  text-align: center;
+
+  margin-top: -1em;
+}

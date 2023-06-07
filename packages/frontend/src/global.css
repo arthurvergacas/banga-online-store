@@ -13,6 +13,7 @@ html {
   --dark-brown: #3d383f;
   --light-brown: #7c6c77;
   --lighter-brown: #d9d9d9;
+  --redish: #ec5d5b;
 
   --navbar-height: 6em;
   --spacing-navbar-content: 4em;
@@ -44,17 +45,12 @@ a {
 }
 
 button {
-  padding: 0.75em 2.25em;
-
-  font-family: 'Galindo', cursive;
-  text-align: center;
-
-  border-radius: 90px;
   border: none;
-
-  background-color: var(--lighter-brown);
-
   cursor: pointer;
+}
+
+input {
+  font-family: 'Work Sans', sans-serif;
 }
 
 #pageContent {

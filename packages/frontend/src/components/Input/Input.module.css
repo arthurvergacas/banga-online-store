@@ -1,0 +1,65 @@
+.label {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+
+  width: 100%;
+
+  font-size: 1.5rem;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.inputContainer:focus-within::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-bottom: 1px solid var(--lighter-brown);
+  animation: input_border_outline 0.25s ease-out forwards;
+}
+
+@keyframes input_border_outline {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.inputContainer input {
+  padding: 0.2em;
+
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid var(--black);
+
+  background-color: var(--dark-brown);
+
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+.inputContainer input::placeholder {
+  color: var(--black);
+}
+
+.inputContainer input:focus {
+  outline: none;
+}
+
+.errorMessage {
+  position: absolute;
+  top: 100%;
+
+  font-size: 0.5em;
+  color: var(--redish);
+}
