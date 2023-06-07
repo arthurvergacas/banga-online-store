@@ -72,10 +72,12 @@ export default function Profile() {
           </section>
         </div>
 
-        <div id={styles.adminButtonsContainer}>
-          <Button>Gerenciar Contas</Button>
-          <Button>Gerenciar Produtos</Button>
-        </div>
+        {user?.isAdmin && (
+          <div id={styles.adminButtonsContainer}>
+            <Button>Gerenciar Contas</Button>
+            <Button>Gerenciar Produtos</Button>
+          </div>
+        )}
       </div>
     </div>
   );
