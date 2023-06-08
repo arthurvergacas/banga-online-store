@@ -1,0 +1,28 @@
+.btn {
+  padding: 0.75em 2.25em;
+
+  background-color: var(--light-brown);
+  color: var(--white);
+
+  font-family: 'Galindo', cursive;
+  font-size: 1.25em;
+  text-align: center;
+
+  border-radius: 90px;
+
+  transition: background-color 0.15s ease-out;
+}
+
+.btn:hover:not(:disabled) {
+  background-color: var(--brown);
+}
+
+.btn:active:not(:disabled) {
+  background-color: var(--light-accent-brown);
+}
+
+.btn:disabled {
+  cursor: default;
+
+  color: var(--lighter-brown);
+}

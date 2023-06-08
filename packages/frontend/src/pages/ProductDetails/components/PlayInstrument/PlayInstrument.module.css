@@ -1,0 +1,53 @@
+#listenProductContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  width: min-content;
+
+  text-align: right;
+  font-size: 1.5em;
+}
+
+@media (max-width: 500px) {
+  #listenProductContainer {
+    width: 100%;
+    justify-content: space-between;
+
+    text-align: left;
+    margin-block: 1em;
+  }
+}
+
+#listenProductContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 5.25em;
+  aspect-ratio: 1;
+
+  padding: 1em;
+
+  border-radius: 50%;
+
+  font-family: sans-serif;
+  font-size: 0.5em;
+  color: var(--dark-brown);
+
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+
+#listenProductContainer button:hover {
+  background-color: var(--light-brown);
+  color: var(--lighter-brown);
+}
+
+#listenProductContainer button:active {
+  background-color: var(--light-accent-brown);
+}
+
+#listenProductContainer i {
+  aspect-ratio: 1;
+  font-size: 1.5rem;
+}
