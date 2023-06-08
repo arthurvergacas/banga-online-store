@@ -7,10 +7,13 @@ import ProductCard from 'components/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from 'components/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductBackoffice() {
   const [products, setProducts] = useState<Product[]>();
   const [productsLoading, setProductsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -24,7 +27,7 @@ export default function ProductBackoffice() {
 
   return (
     <div className={styles.container}>
-      <Button className={styles.addBtn}>
+      <Button onClick={() => navigate('new')} className={styles.addBtn}>
         <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
       </Button>
 

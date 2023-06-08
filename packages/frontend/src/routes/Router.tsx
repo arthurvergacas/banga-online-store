@@ -15,6 +15,7 @@ import UserService from 'services/userService';
 import GuardedRoute from './GuardedRoute';
 import EditUserBackoffice from 'pages/EditUserBackoffice';
 import ProductBackoffice from 'pages/ProductBackoffice';
+import ProductManagementBackoffice from 'pages/ProductManagementBackoffice';
 
 export default function Router() {
   const [userLoggedIn, setUserLoggedIn] = useState(UserService.isUserLoggedIn());
@@ -36,7 +37,7 @@ export default function Router() {
 
           <Route path="admin">
             <Route path="products" element={<ProductBackoffice />} />
-            <Route path="products/:productId" />
+            <Route path="products/:productId" element={<ProductManagementBackoffice />} />
 
             <Route path="users" element={<UserBackoffice />} />
             <Route path="users/:userId" element={<EditUserBackoffice />} />

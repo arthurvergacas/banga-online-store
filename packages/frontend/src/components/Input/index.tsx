@@ -6,6 +6,7 @@ interface InputProps {
   label?: string;
   placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
+  step?: number;
   width?: string;
   autoComplete?: string;
 
@@ -33,6 +34,7 @@ export default function Input({ useFormProps, ...props }: InputProps) {
             autoComplete={props.autoComplete}
             type={props.type ?? 'text'}
             id={props.name}
+            step={props.step}
             placeholder={props.placeholder}
             {...useFormProps.control.register(props.name, {
               required: props.required,
