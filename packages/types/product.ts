@@ -4,6 +4,7 @@ export interface Product {
   subtitle: string;
   description: string;
   price: number;
+  stock: number;
   imageUrl: string;
   audioUrl: string;
 }
