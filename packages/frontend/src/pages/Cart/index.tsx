@@ -32,7 +32,11 @@ export default function Cart() {
       <h1>Carrinho</h1>
 
       <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
-        {productsLoading ? <Spinner /> : products?.map((product) => <ProductCard product={product} key={product.id} />)}
+        {productsLoading ? (
+          <Spinner width="30%" height="30%" />
+        ) : (
+          products?.map((product) => <ProductCard product={product} key={product.id} />)
+        )}
       </div>
 
       {calculateTotal() && (
