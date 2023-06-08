@@ -6,11 +6,12 @@ import Image from 'components/Image';
 
 export interface ProductCardProps {
   product: Product;
+  to?: string;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, to }: ProductCardProps) {
   return (
-    <Link to={`/product/${product.id}`} className={styles.productCardLink}>
+    <Link to={to ?? `/product/${product.id}`} className={styles.productCardLink}>
       <div className={styles.productCard}>
         <header>
           <div>

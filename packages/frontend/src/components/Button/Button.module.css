@@ -1,4 +1,4 @@
-#btn {
+.btn {
   padding: 0.75em 2.25em;
 
   background-color: var(--light-brown);
@@ -13,15 +13,15 @@
   transition: background-color 0.15s ease-out;
 }
 
-#btn:hover:not(:disabled) {
+.btn:hover:not(:disabled) {
   background-color: var(--brown);
 }
 
-#btn:active:not(:disabled) {
+.btn:active:not(:disabled) {
   background-color: var(--light-accent-brown);
 }
 
-#btn:disabled {
+.btn:disabled {
   cursor: default;
 
   color: var(--lighter-brown);

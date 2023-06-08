@@ -16,6 +16,10 @@ const ProductService = {
   createProduct: async (product: ProductRequest): Promise<void> => {
     await sleep();
   },
+
+  save: async (produc: Product): Promise<void> => {
+    await sleep();
+  },
 };
 
 export default ProductService;

@@ -57,7 +57,9 @@ export default function Profile() {
             <div className={styles.profileRow}>
               <span>
                 Data de nascimento:{' '}
-                <time dateTime={user?.birthDate.toDateString()}>{user?.birthDate.toLocaleDateString()}</time>
+                <time dateTime={new Date(user!.birthDate).toDateString()}>
+                  {new Date(user!.birthDate).toLocaleDateString()}
+                </time>
               </span>
             </div>
           </section>
