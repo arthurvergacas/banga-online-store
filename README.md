@@ -90,12 +90,39 @@ In addition to the Figma designs, you can find the HTML & CSS for **Home**, **Pr
 
 ## Comments About the Code
 
+Our codebase is not much more than a simple react structured multipaged project.
+
+Along the prioject tree, it's possible to find various of the main application resources and the application itself. The entry point files, such as `index.tsx`, are the responsible for rendering the main app component - included in `app.tsx`, containing the Banga's navbar and a main content section.
+
+The main application will navigate through the pages being directed to determined routes in order to access specific resources. Those are declared and implemented in `router.tsx` through `react-router-dom` library. Those pages are contained in `src/pages/` and, alongside individual component stylization, respect a global css style contained in `global.css`.
+
+Inside `src/services`, it's possible to find the project's services modules - they manage context-restricted application funcionalities, making the entire project scalable, extensive, readable and debugging-friendly.
+
+Our code respects common organization practices for any React application.
+
 ## Test Plan
+
+In our current development process, we have primarily relied on simple manual tests to ensure the functionality and stability of our system. While these tests have served us adequately so far, we recognize the immense benefits that automated tests can bring to our project - specifically integration ones.
+
+However, before we start implementing integration tests, it is crucial to establish a solid foundation at the backend layer. Once we have well-defined NodeJS backend layer, we should proceed with the development of automated tests focused on the frontend x backend interaction. These tests will validate the communication and data exchange between the user interface and the underlying system, one of the most flaky interactions in an application's flow.
+
+In summary, while we have relied on simple manual tests for now, although we recognize it's necessary to implement automated integration tests for frontend/backend interfacing. By doing so, we can ensure the stability and reliability of our system.
 
 ## Test Results
 
+The simple manual tests for the main application have been completed without any complications. The application functioned perfectly during testing, ensuring its behavior parity with what we expected.
+
 ## Build Procedures
+
+First of all, it's necessary to clone this repository and, if already cloned, make sure you've got the most recent project version.
+`git clone https://github.com/arthurvergacas/banga-online-store.git`
+
+And, inside the cloned folder:
+`git pull origin main`
+
+After this, the following steps are extremely similar to any other simple React application:
+`npm install && npm run start:frontend`
 
 ## Problems
 
-## Comments
+One of the most relevant project's complications were the really numerous pages to develop. The quantity turned something easy in a massive manual labor.
