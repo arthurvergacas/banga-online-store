@@ -6,7 +6,7 @@ import Image from 'components/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import CartService from 'services/cartService';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Spinner from 'components/Spinner';
 
 export interface CartProductCardProps {
@@ -14,9 +14,11 @@ export interface CartProductCardProps {
   to?: string;
 
   onRemove: () => void;
+  onQuantityChange: (quantity: number) => void;
 }
 
-export default function CartProductCard({ product, to, onRemove }: CartProductCardProps) {
+export default function CartProductCard({ product, to, onRemove, onQuantityChange }: CartProductCardProps) {
+  const [quantity, setQuantity] = useState(1);
   const [removing, setRemoving] = useState(false);
 
   const removeFromCart = async () => {
@@ -25,6 +27,8 @@ export default function CartProductCard({ product, to, onRemove }: CartProductCa
 
     onRemove();
   };
+
+  useEffect(() => onQuantityChange(quantity), [onQuantityChange, quantity]);
 
   return (
     <Link to={to ?? `/product/${product.id}`} className={styles.productCardLink}>
@@ -46,6 +50,23 @@ export default function CartProductCard({ product, to, onRemove }: CartProductCa
         />
 
         <footer>
+          <div className={styles.quantityInputContainer} onClick={(event) => event.preventDefault()}>
+            <label htmlFor="quantity">Quantidade</label>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              value={quantity}
+              onChange={(event) =>
+                setQuantity((prev) => {
+                  const newQuantity = parseInt(event.target.value || prev.toString());
+                  return newQuantity > 0 ? newQuantity : prev;
+                })
+              }
+              onClick={(event) => (event.target as HTMLInputElement).select()}
+            />
+          </div>
+
           <button
             className={styles.removeProductButton}
             onClick={(event) => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import { Product } from '@banga/types/product';
+import { ProductPurchase } from '@banga/types/purchase';
 import Spinner from 'components/Spinner';
 import CartService from 'services/cartService';
 import Button from 'components/Button';
@@ -11,17 +12,45 @@ export default function Cart() {
   const [products, setProducts] = useState<Product[]>();
   const [productsLoading, setProductsLoading] = useState(true);
   const [shouldUpdate, setShouldUpdate] = useState(true);
+  const [purchaseItens, setPurchaseItens] = useState<ProductPurchase[]>([]);
+  const [price, setPrice] = useState(0);
 
   const navigate = useNavigate();
 
   const calculateTotal = () => {
-    return products?.reduce((total, product) => product.price + total, 0);
+    setPrice(
+      products?.reduce((total, product, index) => {
+        const price = product.price * purchaseItens[index].quantity;
+
+        return price + total;
+      }, 0) || 0
+    );
+  };
+
+  const updatePurchaseItem = (productId: Product['id'], quantity: number) => {
+    const index = purchaseItens?.findIndex((item) => item.productId === productId);
+
+    if (index !== -1)
+      setPurchaseItens((prev) => {
+        prev[index] = { productId, quantity };
+        return prev;
+      });
+    else setPurchaseItens((prev) => [...prev, { productId, quantity }]);
+
+    calculateTotal();
   };
 
   useEffect(() => {
     const getProducts = async () => {
       setProductsLoading(true);
-      setProducts(await CartService.getAll());
+
+      const productsInCart = await CartService.getAll();
+
+      setProducts(productsInCart);
+      productsInCart.forEach((product) =>
+        setPurchaseItens((prev) => [...prev, { productId: product.id, quantity: 1 }])
+      );
+
       setProductsLoading(false);
     };
 
@@ -47,14 +76,19 @@ export default function Cart() {
           <Spinner width="30%" height="30%" />
         ) : (
           products?.map((product) => (
-            <CartProductCard product={product} key={product.id} onRemove={() => setShouldUpdate(true)} />
+            <CartProductCard
+              product={product}
+              key={product.id}
+              onRemove={() => setShouldUpdate(true)}
+              onQuantityChange={(quantity) => updatePurchaseItem(product.id, quantity)}
+            />
           ))
         )}
       </div>
 
-      {calculateTotal() && (
+      {!productsLoading && (
         <span className={styles.totalPrice}>
-          <b>Total:</b> R$ {calculateTotal()?.toLocaleString()}
+          <b>Total:</b> R$ {price.toLocaleString()}
         </span>
       )}
 

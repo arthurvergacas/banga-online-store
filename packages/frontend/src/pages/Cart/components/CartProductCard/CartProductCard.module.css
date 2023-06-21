@@ -73,6 +73,28 @@
 
 footer {
   display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+}
+
+.quantityInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  width: fit-content;
+
+  font-size: 1.25em;
+}
+
+.quantityInputContainer input {
+  width: 2.4em;
+
+  padding: 0.1em 0.35em;
+
+  text-align: right;
+  font-size: 0.9em;
 }
 
 .removeProductButton {
