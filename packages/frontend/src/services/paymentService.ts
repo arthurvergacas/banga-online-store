@@ -1,8 +1,8 @@
-import { Payment } from '@banga/types/payment';
+import { PaymentInfo } from '@banga/types/payment';
 import sleep from './sleep';
 
 const paymentService = {
-  pay: async (paymentData: Payment) => {
+  pay: async (paymentData: PaymentInfo) => {
     await sleep();
   },
 };
