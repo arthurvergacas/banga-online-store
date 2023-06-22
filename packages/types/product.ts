@@ -9,4 +9,8 @@ export interface Product {
   audioUrl: string;
 }
 
+export interface ProductCart extends Product {
+  quantity: number;
+}
+
 export type ProductRequest = Omit<Product, 'id'>;
