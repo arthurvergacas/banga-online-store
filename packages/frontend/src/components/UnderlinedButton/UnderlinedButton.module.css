@@ -1,0 +1,16 @@
+.underlineButton {
+  text-decoration: underline;
+
+  background-color: transparent;
+  color: var(--white);
+
+  transition: color 0.15s ease-out;
+}
+
+.underlineButton:hover {
+  color: var(--lighter-brown);
+}
+
+.underlineButton:active {
+  color: var(--light-brown);
+}
