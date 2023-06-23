@@ -7,6 +7,7 @@ import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import UnderlinedButton from 'components/UnderlinedButton';
 
 export default function ProductManagementBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -17,6 +18,41 @@ export default function ProductManagementBackoffice() {
 
   const { productId } = useParams();
   const navigate = useNavigate();
+
+  const onSubmit = async (data: Product | ProductRequest) => {
+    try {
+      setSavingProduct(true);
+
+      if (productId !== 'new') await ProductService.save(data as Product);
+      else await ProductService.createProduct(data as ProductRequest);
+
+      navigate('/admin/products');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingProduct(false);
+    }
+  };
+
+  const deleteUser = async () => {
+    try {
+      setSavingProduct(true);
+
+      await ProductService.delete(useFormProps.getValues().id);
+
+      navigate('/admin/products');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingProduct(false);
+    }
+  };
 
   useEffect(() => {
     const populateFormWithProductData = (productData: Product) => {
@@ -43,24 +79,6 @@ export default function ProductManagementBackoffice() {
     if (productId !== 'new') getProduct();
     else setProductLoading(false);
   }, [productId, navigate, useFormProps]);
-
-  const onSubmit = async (data: Product | ProductRequest) => {
-    try {
-      setSavingProduct(true);
-
-      if (productId !== 'new') await ProductService.save(data as Product);
-      else await ProductService.createProduct(data as ProductRequest);
-
-      navigate('/admin/products');
-      return;
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
-    } finally {
-      setSavingProduct(false);
-    }
-  };
 
   if (productLoading) {
     return (
@@ -143,6 +161,10 @@ export default function ProductManagementBackoffice() {
         <Button type="submit" disabled={savingProduct} className={styles.saveButton}>
           {savingProduct ? <Spinner height="30px" /> : <>Salvar</>}
         </Button>
+
+        <UnderlinedButton className={styles.deleteButton} onClick={deleteUser}>
+          Deletar Produto
+        </UnderlinedButton>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
