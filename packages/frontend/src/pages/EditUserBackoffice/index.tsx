@@ -7,6 +7,7 @@ import Button from 'components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
+import UnderlinedButton from 'components/UnderlinedButton';
 
 export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -17,6 +18,40 @@ export default function EditUserBackoffice() {
 
   const { userId } = useParams();
   const navigate = useNavigate();
+
+  const onSubmit = async (data: User) => {
+    try {
+      setSavingUser(true);
+
+      await UserService.save(data);
+
+      navigate('/admin/users');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingUser(false);
+    }
+  };
+
+  const deleteUser = async () => {
+    try {
+      setSavingUser(true);
+
+      await UserService.remove(useFormProps.getValues().id);
+
+      navigate('/admin/users');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingUser(false);
+    }
+  };
 
   useEffect(() => {
     const populateFormWithUserData = (userData: User) => {
@@ -42,23 +77,6 @@ export default function EditUserBackoffice() {
 
     getUser();
   }, [userId, navigate, useFormProps]);
-
-  const onSubmit = async (data: User) => {
-    try {
-      setSavingUser(true);
-
-      await UserService.save(data);
-
-      navigate('/admin/users');
-      return;
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
-    } finally {
-      setSavingUser(false);
-    }
-  };
 
   if (userLoading) {
     return (
@@ -139,6 +157,10 @@ export default function EditUserBackoffice() {
         <Button type="submit" disabled={savingUser} className={styles.saveButton}>
           {savingUser ? <Spinner height="30px" /> : <>Salvar</>}
         </Button>
+
+        <UnderlinedButton className={styles.deleteButton} onClick={deleteUser}>
+          Deletar Usuário
+        </UnderlinedButton>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>

@@ -37,7 +37,7 @@ const UserService = {
     return mockUsers;
   },
 
-  getById: async (userId: string): Promise<User | undefined> => {
+  getById: async (userId: User['id']): Promise<User | undefined> => {
     await sleep();
 
     return mockUsers.find((user) => user.id === userId);
@@ -48,6 +48,13 @@ const UserService = {
 
     const userIndex = mockUsers.findIndex((user) => user.id === userData.id);
     mockUsers[userIndex] = userData;
+  },
+
+  remove: async (userId: User['id']): Promise<void> => {
+    await sleep();
+
+    const userIndex = mockUsers.findIndex((user) => user.id === userId);
+    mockUsers.splice(userIndex, 1);
   },
 };
 
