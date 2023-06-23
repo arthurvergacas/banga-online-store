@@ -11,6 +11,7 @@ import Button from 'components/Button';
 export default function ProductManagementBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [productLoading, setProductLoading] = useState(true);
+  const [savingProduct, setSavingProduct] = useState(false);
 
   const useFormProps = useForm<Product>({ mode: 'all' });
 
@@ -44,15 +45,20 @@ export default function ProductManagementBackoffice() {
   }, [productId, navigate, useFormProps]);
 
   const onSubmit = async (data: Product | ProductRequest) => {
-    console.log(data);
-
     try {
+      setSavingProduct(true);
+
       if (productId !== 'new') await ProductService.save(data as Product);
       else await ProductService.createProduct(data as ProductRequest);
+
+      navigate('/admin/products');
+      return;
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
+    } finally {
+      setSavingProduct(false);
     }
   };
 
@@ -134,7 +140,9 @@ export default function ProductManagementBackoffice() {
           <Input label="Estoque" useFormProps={useFormProps} required name="stock" type="number" placeholder="XX" />
         </div>
 
-        <Button type="submit">Salvar</Button>
+        <Button type="submit" disabled={savingProduct} className={styles.saveButton}>
+          {savingProduct ? <Spinner height="30px" /> : <>Salvar</>}
+        </Button>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
