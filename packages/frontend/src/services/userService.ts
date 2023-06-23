@@ -50,7 +50,7 @@ const UserService = {
     mockUsers[userIndex] = userData;
   },
 
-  remove: async (userId: User['id']): Promise<void> => {
+  delete: async (userId: User['id']): Promise<void> => {
     await sleep();
 
     const userIndex = mockUsers.findIndex((user) => user.id === userId);

@@ -40,7 +40,7 @@ export default function EditUserBackoffice() {
     try {
       setSavingUser(true);
 
-      await UserService.remove(useFormProps.getValues().id);
+      await UserService.delete(useFormProps.getValues().id);
 
       navigate('/admin/users');
       return;
