@@ -1,17 +1,16 @@
-import { Product, ProductRequest } from '@banga/types/product';
+import { Product, ProductCart } from '@banga/types/product';
 import sleep from './sleep';
 import { mockCartProducts } from './mockProducts';
 
 const CartService = {
-  getAll: async (): Promise<Product[]> => {
+  getAll: async (): Promise<ProductCart[]> => {
     await sleep();
     return mockCartProducts;
   },
 
-  addToCart: async (product: ProductRequest): Promise<void> => {
+  addToCart: async (product: Product): Promise<void> => {
     await sleep();
-    const id = Math.floor(Math.random() * 1000).toString();
-    mockCartProducts.push({ id, ...product });
+    mockCartProducts.push({ ...product, quantity: 1 });
   },
 
   removeFromCart: async (id: Product['id']): Promise<void> => {

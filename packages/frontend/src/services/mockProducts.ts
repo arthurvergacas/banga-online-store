@@ -1,4 +1,4 @@
-import { Product } from '@banga/types/product';
+import { Product, ProductCart } from '@banga/types/product';
 
 export const mockProducts: Product[] = [
   {
@@ -47,4 +47,4 @@ export const mockProducts: Product[] = [
   },
 ];
 
-export const mockCartProducts: Product[] = mockProducts.slice(0, 2);
+export const mockCartProducts: ProductCart[] = mockProducts.slice(0, 2).map((product) => ({ ...product, quantity: 1 }));

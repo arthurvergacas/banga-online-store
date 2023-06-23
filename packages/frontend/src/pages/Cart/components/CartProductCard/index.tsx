@@ -1,4 +1,4 @@
-import { Product } from '@banga/types/product';
+import { ProductCart } from '@banga/types/product';
 import { Link } from 'react-router-dom';
 
 import styles from './CartProductCard.module.css';
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import Spinner from 'components/Spinner';
 
 export interface CartProductCardProps {
-  product: Product;
+  product: ProductCart;
   to?: string;
 
   onRemove: () => void;
@@ -18,7 +18,7 @@ export interface CartProductCardProps {
 }
 
 export default function CartProductCard({ product, to, onRemove, onQuantityChange }: CartProductCardProps) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product.quantity);
   const [removing, setRemoving] = useState(false);
 
   const removeFromCart = async () => {

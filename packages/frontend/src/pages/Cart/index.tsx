@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Cart.module.css';
-import { Product } from '@banga/types/product';
+import { ProductCart } from '@banga/types/product';
 import { ProductPurchase } from '@banga/types/purchase';
 import Spinner from 'components/Spinner';
 import CartService from 'services/cartService';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import CartProductCard from './components/CartProductCard';
 
 export default function Cart() {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<ProductCart[]>();
   const [productsLoading, setProductsLoading] = useState(true);
   const [shouldUpdate, setShouldUpdate] = useState(true);
   const [purchaseItens, setPurchaseItens] = useState<ProductPurchase[]>([]);
@@ -27,7 +27,7 @@ export default function Cart() {
     );
   };
 
-  const updatePurchaseItem = (productId: Product['id'], quantity: number) => {
+  const updatePurchaseItem = (productId: ProductCart['id'], quantity: number) => {
     const index = purchaseItens?.findIndex((item) => item.productId === productId);
 
     if (index !== -1)
