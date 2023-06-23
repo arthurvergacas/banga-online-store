@@ -60,11 +60,15 @@ export default function EditUserBackoffice() {
     );
   }
 
-  // TODO isAdmin checkbox
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
         <h1>Editar Usuário</h1>
+
+        <label htmlFor="isAdmin" className={styles.isAdminLabel}>
+          Admin
+          <input type="checkbox" id="isAdmin" {...useFormProps.register('isAdmin')} />
+        </label>
 
         <div className={styles.row}>
           <Input

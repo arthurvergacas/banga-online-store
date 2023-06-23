@@ -45,6 +45,9 @@ const UserService = {
 
   save: async (userData: User): Promise<void> => {
     await sleep();
+
+    const userIndex = mockUsers.findIndex((user) => user.id === userData.id);
+    mockUsers[userIndex] = userData;
   },
 };
 
