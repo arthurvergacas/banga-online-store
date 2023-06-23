@@ -11,6 +11,7 @@ import Spinner from 'components/Spinner';
 export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [userLoading, setUserLoading] = useState(true);
+  const [savingUser, setSavingUser] = useState(false);
 
   const useFormProps = useForm<User>({ mode: 'all' });
 
@@ -44,11 +45,18 @@ export default function EditUserBackoffice() {
 
   const onSubmit = async (data: User) => {
     try {
+      setSavingUser(true);
+
       await UserService.save(data);
+
+      navigate('/admin/users');
+      return;
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
+    } finally {
+      setSavingUser(false);
     }
   };
 
@@ -128,7 +136,9 @@ export default function EditUserBackoffice() {
           />
         </div>
 
-        <Button type="submit">Salvar</Button>
+        <Button type="submit" disabled={savingUser} className={styles.saveButton}>
+          {savingUser ? <Spinner height="30px" /> : <>Salvar</>}
+        </Button>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
