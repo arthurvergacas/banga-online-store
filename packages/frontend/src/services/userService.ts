@@ -25,6 +25,12 @@ const UserService = {
     userSessionCreated = true;
   },
 
+  logout: async (): Promise<void> => {
+    await sleep();
+
+    userSessionCreated = false;
+  },
+
   signUp: async (signUpData: UserRequest): Promise<void> => {
     await sleep();
 
