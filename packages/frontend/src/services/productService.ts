@@ -17,8 +17,15 @@ const ProductService = {
     await sleep();
   },
 
-  save: async (produc: Product): Promise<void> => {
+  save: async (product: Product): Promise<void> => {
     await sleep();
+  },
+
+  delete: async (productId: Product['id']): Promise<void> => {
+    await sleep();
+
+    const productIndex = mockProducts.findIndex((product) => product.id === productId);
+    mockProducts.splice(productIndex, 1);
   },
 };
 

@@ -1,31 +1,71 @@
 import { useEffect, useState } from 'react';
 import styles from './Cart.module.css';
-import { Product } from '@banga/types/product';
+import { ProductCart } from '@banga/types/product';
+import { ProductPurchase } from '@banga/types/purchase';
 import Spinner from 'components/Spinner';
-import ProductCard from 'components/ProductCard';
 import CartService from 'services/cartService';
 import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
+import CartProductCard from './components/CartProductCard';
 
 export default function Cart() {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<ProductCart[]>();
   const [productsLoading, setProductsLoading] = useState(true);
+  const [shouldUpdate, setShouldUpdate] = useState(true);
+  const [purchaseItens, setPurchaseItens] = useState<ProductPurchase[]>([]);
+  const [price, setPrice] = useState(0);
 
   const navigate = useNavigate();
 
   const calculateTotal = () => {
-    return products?.reduce((total, product) => product.price + total, 0);
+    setPrice(
+      products?.reduce((total, product, index) => {
+        const price = product.price * purchaseItens[index].quantity;
+
+        return price + total;
+      }, 0) || 0
+    );
+  };
+
+  const updatePurchaseItem = (productId: ProductCart['id'], quantity: number) => {
+    const index = purchaseItens?.findIndex((item) => item.productId === productId);
+
+    if (index !== -1)
+      setPurchaseItens((prev) => {
+        prev[index] = { productId, quantity };
+        return prev;
+      });
+    else setPurchaseItens((prev) => [...prev, { productId, quantity }]);
+
+    calculateTotal();
   };
 
   useEffect(() => {
     const getProducts = async () => {
       setProductsLoading(true);
-      setProducts(await CartService.getAll());
+
+      const productsInCart = await CartService.getAll();
+
+      setProducts(productsInCart);
+      productsInCart.forEach((product) =>
+        setPurchaseItens((prev) => [...prev, { productId: product.id, quantity: 1 }])
+      );
+
       setProductsLoading(false);
     };
 
     getProducts();
   }, []);
+
+  useEffect(() => {
+    const getProductsWithoutLoading = async () => {
+      setProducts(await CartService.getAll());
+
+      setShouldUpdate(false);
+    };
+
+    if (shouldUpdate) getProductsWithoutLoading();
+  }, [shouldUpdate]);
 
   return (
     <div className={styles.container}>
@@ -35,13 +75,20 @@ export default function Cart() {
         {productsLoading ? (
           <Spinner width="30%" height="30%" />
         ) : (
-          products?.map((product) => <ProductCard product={product} key={product.id} />)
+          products?.map((product) => (
+            <CartProductCard
+              product={product}
+              key={product.id}
+              onRemove={() => setShouldUpdate(true)}
+              onQuantityChange={(quantity) => updatePurchaseItem(product.id, quantity)}
+            />
+          ))
         )}
       </div>
 
-      {calculateTotal() && (
+      {!productsLoading && (
         <span className={styles.totalPrice}>
-          <b>Total:</b> R$ {calculateTotal()?.toLocaleString()}
+          <b>Total:</b> R$ {price.toLocaleString()}
         </span>
       )}
 

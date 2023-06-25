@@ -1,0 +1,113 @@
+.productCardLink {
+  width: 100%;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  height: fit-content;
+  aspect-ratio: 7 / 5;
+  max-width: 100%;
+  max-height: 100%;
+
+  background-color: var(--light-brown);
+
+  border-radius: 15px;
+
+  padding: 0.6em 1.125em;
+  margin: auto;
+
+  transition: transform 0.15s ease-out;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  cursor: pointer;
+}
+
+.productCard:hover {
+  transform: scale(105%);
+}
+
+.productCard * {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.productCard h3 {
+  font-weight: 600;
+}
+
+.productCard h4 {
+  font-weight: 500;
+}
+
+.productCard strong {
+  font-weight: 600;
+}
+
+.productCard header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+}
+
+.productImageSpinnerContainer {
+  height: inherit;
+  margin-top: 3.75em;
+}
+
+.productCard .productImage {
+  height: 9.75em;
+  max-width: 100%;
+
+  margin-block: 1em;
+
+  border-radius: 15px;
+
+  object-fit: contain;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+}
+
+.quantityInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  width: fit-content;
+
+  font-size: 1.25em;
+}
+
+.quantityInputContainer input {
+  width: 2.4em;
+
+  padding: 0.1em 0.35em;
+
+  text-align: right;
+  font-size: 0.9em;
+}
+
+.removeProductButton {
+  height: 1.5rem;
+
+  font-size: 1.5rem;
+
+  color: var(--dark-brown);
+  background-color: transparent;
+
+  transition: color 0.15s ease-out;
+}
+
+.removeProductButton:hover {
+  color: var(--light-accent-brown);
+}

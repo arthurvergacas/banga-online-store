@@ -33,7 +33,7 @@ export default function Router() {
           <Route path="payment" element={<Payment />} />
           <Route path="checkout" element={<Checkout />} />
 
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Profile onLogout={() => setUserLoggedIn(false)} />} />
 
           <Route path="admin">
             <Route path="products" element={<ProductBackoffice />} />

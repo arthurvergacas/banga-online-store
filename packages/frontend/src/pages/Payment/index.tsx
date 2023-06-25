@@ -1,4 +1,4 @@
-import { Payment as PaymentType } from '@banga/types/payment';
+import { PaymentInfo as PaymentType } from '@banga/types/payment';
 import Input from 'components/Input';
 import styles from './Payment.module.css';
 import { useForm } from 'react-hook-form';

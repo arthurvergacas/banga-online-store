@@ -25,6 +25,12 @@ const UserService = {
     userSessionCreated = true;
   },
 
+  logout: async (): Promise<void> => {
+    await sleep();
+
+    userSessionCreated = false;
+  },
+
   signUp: async (signUpData: UserRequest): Promise<void> => {
     await sleep();
 
@@ -37,7 +43,7 @@ const UserService = {
     return mockUsers;
   },
 
-  getById: async (userId: string): Promise<User | undefined> => {
+  getById: async (userId: User['id']): Promise<User | undefined> => {
     await sleep();
 
     return mockUsers.find((user) => user.id === userId);
@@ -45,6 +51,16 @@ const UserService = {
 
   save: async (userData: User): Promise<void> => {
     await sleep();
+
+    const userIndex = mockUsers.findIndex((user) => user.id === userData.id);
+    mockUsers[userIndex] = userData;
+  },
+
+  delete: async (userId: User['id']): Promise<void> => {
+    await sleep();
+
+    const userIndex = mockUsers.findIndex((user) => user.id === userId);
+    mockUsers.splice(userIndex, 1);
   },
 };
 

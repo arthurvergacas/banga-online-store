@@ -21,6 +21,19 @@
   font-family: inherit;
 }
 
+.isAdminLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+
+  font-size: 1.5rem;
+}
+
+.isAdminLabel input {
+  height: fit-content;
+  scale: 1.5;
+}
+
 .errorMessage {
   color: var(--redish);
   text-align: center;
@@ -49,4 +62,12 @@
   .row > * {
     width: 100%;
   }
+}
+
+.saveButton {
+  width: 9.93rem;
+}
+
+.deleteButton {
+  margin-top: -1em;
 }
