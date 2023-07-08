@@ -139,7 +139,7 @@ export default function ProductManagementBackoffice() {
             label="Som"
             useFormProps={useFormProps}
             required
-            name="imageUrl"
+            name="image"
             type="file"
             placeholder="XX/XX/XXXX"
           />
@@ -148,7 +148,7 @@ export default function ProductManagementBackoffice() {
             label="Foto"
             useFormProps={useFormProps}
             required
-            name="audioUrl"
+            name="audio"
             type="file"
             placeholder="Rua; número; cidade; estado"
           />

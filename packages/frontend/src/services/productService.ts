@@ -1,29 +1,36 @@
 import { Product, ProductRequest } from '@banga/types/product';
-import sleep from './sleep';
 import api from './api';
 
 const ProductService = {
   getAll: async (): Promise<Product[]> => {
-    const { data } = await api.get('/products');
-    return data;
+    try {
+      const { data } = await api.get('/products');
+      return data;
+    } catch {
+      return [];
+    }
   },
 
   getById: async (productId: Product['id']): Promise<Product | undefined> => {
-    const { data } = await api.get(`/products/${productId}`);
-    return data;
+    try {
+      const { data } = await api.get(`/products/${productId}`);
+      return data;
+    } catch {
+      return undefined;
+    }
   },
 
   // TODO lidar com arquivos
   createProduct: async (product: ProductRequest): Promise<void> => {
-    await sleep();
+    return api.postForm('/products', product);
   },
 
   save: async (product: Product): Promise<void> => {
-    await sleep();
+    return api.putForm('/products', product);
   },
 
   delete: async (productId: Product['id']): Promise<void> => {
-    api.delete(`/products/${productId}`);
+    return api.delete(`/products/${productId}`);
   },
 };
 

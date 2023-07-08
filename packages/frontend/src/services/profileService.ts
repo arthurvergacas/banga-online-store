@@ -13,11 +13,11 @@ const ProfileService = {
   },
 
   save: async (userData: User): Promise<void> => {
-    api.put(`/users/${userData.id}`, userData);
+    return api.put(`/users/${userData.id}`, userData);
   },
 
   delete: async (userId: User['id']): Promise<void> => {
-    api.delete(`/users/${userId}`);
+    return api.delete(`/users/${userId}`);
   },
 };
 

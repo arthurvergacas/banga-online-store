@@ -3,8 +3,8 @@ import { ProductCart } from '@banga/types/product';
 import api from './api';
 
 const PaymentService = {
-  pay: async (paymentInfo: PaymentInfo, products: ProductCart[]) => {
-    api.post<void, unknown, Payment>('/payment', { paymentInfo, products });
+  pay: async (paymentInfo: PaymentInfo, products: ProductCart[]): Promise<void> => {
+    return api.post<void, void, Payment>('/payment', { paymentInfo, products });
   },
 };
 
