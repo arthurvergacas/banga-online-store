@@ -17,13 +17,18 @@ export interface CartProductCardProps {
   onQuantityChange: (quantity: number) => void;
 }
 
-export default function CartProductCard({ product, to, onRemove, onQuantityChange }: CartProductCardProps) {
+export default function CartProductCard({
+  product,
+  to,
+  onRemove,
+  onQuantityChange,
+}: CartProductCardProps) {
   const [quantity, setQuantity] = useState(product.quantity);
   const [removing, setRemoving] = useState(false);
 
   const removeFromCart = async () => {
     setRemoving(true);
-    await CartService.removeFromCart(product.id);
+    CartService.removeFromCart(product.id);
 
     onRemove();
   };
@@ -50,7 +55,10 @@ export default function CartProductCard({ product, to, onRemove, onQuantityChang
         />
 
         <footer>
-          <div className={styles.quantityInputContainer} onClick={(event) => event.preventDefault()}>
+          <div
+            className={styles.quantityInputContainer}
+            onClick={(event) => event.preventDefault()}
+          >
             <label htmlFor="quantity">Quantidade</label>
             <input
               type="number"

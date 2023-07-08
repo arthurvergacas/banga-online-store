@@ -44,7 +44,7 @@ export default function Cart() {
     const getProducts = async () => {
       setProductsLoading(true);
 
-      const productsInCart = await CartService.getAll();
+      const productsInCart = CartService.getAll();
 
       setProducts(productsInCart);
       productsInCart.forEach((product) =>
@@ -59,7 +59,7 @@ export default function Cart() {
 
   useEffect(() => {
     const getProductsWithoutLoading = async () => {
-      setProducts(await CartService.getAll());
+      setProducts(CartService.getAll());
 
       setShouldUpdate(false);
     };

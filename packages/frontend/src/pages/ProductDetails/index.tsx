@@ -22,7 +22,7 @@ export default function ProductDetails() {
     if (!product) return;
 
     setAddingProductToCart(true);
-    await CartService.addToCart(product);
+    CartService.addToCart(product);
     setAddingProductToCart(false);
 
     navigate('/cart');
@@ -48,7 +48,12 @@ export default function ProductDetails() {
     return (
       <div
         className={styles.container}
-        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
       >
         <Spinner width="5em" height="5em" />
       </div>
@@ -73,13 +78,21 @@ export default function ProductDetails() {
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price.toLocaleString()}</strong>
             <Button onClick={addToCart} disabled={addingProductToCart}>
-              {addingProductToCart ? <Spinner width="10%" height="none" /> : <>ADICIONAR AO CARRINHO</>}
+              {addingProductToCart ? (
+                <Spinner width="10%" height="none" />
+              ) : (
+                <>ADICIONAR AO CARRINHO</>
+              )}
             </Button>
           </div>
         </div>
 
         <div id={styles.imgContainer}>
-          <Image src={product!.imageUrl} alt={product!.title} spinnerClassName={styles.spinnerContainer} />
+          <Image
+            src={product!.imageUrl}
+            alt={product!.title}
+            spinnerClassName={styles.spinnerContainer}
+          />
         </div>
       </section>
     </div>
