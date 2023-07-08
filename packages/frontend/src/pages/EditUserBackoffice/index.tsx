@@ -5,9 +5,9 @@ import { User } from '@banga/types/user';
 import { useEffect, useState } from 'react';
 import Button from 'components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
-import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
 import UnderlinedButton from 'components/UnderlinedButton';
+import ProfileService from 'services/profileService';
 
 export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export default function EditUserBackoffice() {
     try {
       setSavingUser(true);
 
-      await UserService.save(data);
+      await ProfileService.save(data);
 
       navigate('/admin/users');
       return;
@@ -40,7 +40,7 @@ export default function EditUserBackoffice() {
     try {
       setSavingUser(true);
 
-      await UserService.delete(useFormProps.getValues().id);
+      await ProfileService.delete(useFormProps.getValues().id);
 
       navigate('/admin/users');
       return;
@@ -63,7 +63,7 @@ export default function EditUserBackoffice() {
     const getUser = async () => {
       if (userId) {
         setUserLoading(true);
-        const fetchedUser = await UserService.getById(userId);
+        const fetchedUser = await ProfileService.getById(userId);
 
         if (fetchedUser == null) {
           navigate('/admin/users');
@@ -107,11 +107,25 @@ export default function EditUserBackoffice() {
             autoComplete="new-password"
           />
 
-          <Input label="CPF" useFormProps={useFormProps} required name="cpf" type="text" placeholder="XXX.XXX.XXX-XX" />
+          <Input
+            label="CPF"
+            useFormProps={useFormProps}
+            required
+            name="cpf"
+            type="text"
+            placeholder="XXX.XXX.XXX-XX"
+          />
         </div>
 
         <div className={styles.row}>
-          <Input label="RG" useFormProps={useFormProps} required name="rg" type="text" placeholder="XX.XXX.XXX-X" />
+          <Input
+            label="RG"
+            useFormProps={useFormProps}
+            required
+            name="rg"
+            type="text"
+            placeholder="XX.XXX.XXX-X"
+          />
 
           <Input
             label="Email"

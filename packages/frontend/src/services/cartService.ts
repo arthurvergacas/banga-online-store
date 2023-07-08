@@ -1,23 +1,30 @@
 import { Product, ProductCart } from '@banga/types/product';
-import sleep from './sleep';
-import { mockCartProducts } from './mockProducts';
+import StorageService, { StorageKeys } from './storageService';
 
 const CartService = {
-  getAll: async (): Promise<ProductCart[]> => {
-    await sleep();
-    return mockCartProducts;
+  getAll: (): ProductCart[] => {
+    return StorageService.get<ProductCart[]>(StorageKeys.CART);
   },
 
-  addToCart: async (product: Product): Promise<void> => {
-    await sleep();
-    mockCartProducts.push({ ...product, quantity: 1 });
+  addToCart: (product: Product): void => {
+    const cartProducts = StorageService.get<ProductCart[]>(StorageKeys.CART);
+
+    cartProducts.push({ ...product, quantity: 1 });
+
+    StorageService.set(StorageKeys.CART, cartProducts);
   },
 
-  removeFromCart: async (id: Product['id']): Promise<void> => {
-    await sleep();
+  removeFromCart: (id: Product['id']): void => {
+    const cartProducts = StorageService.get<ProductCart[]>(StorageKeys.CART);
 
-    const index = mockCartProducts.findIndex((p) => p.id === id);
-    mockCartProducts.splice(index, 1);
+    const index = cartProducts.findIndex((p) => p.id === id);
+    cartProducts.splice(index, 1);
+
+    StorageService.set(StorageKeys.CART, cartProducts);
+  },
+
+  clearCart: (): void => {
+    StorageService.set(StorageKeys.CART, []);
   },
 };
 
