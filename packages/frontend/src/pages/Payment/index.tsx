@@ -21,7 +21,7 @@ export default function Payment() {
     try {
       setIsLoadingPayment(true);
 
-      await PaymentService.pay(data);
+      await PaymentService.pay(data, CartService.getAll());
 
       CartService.clearCart();
       navigate('/checkout');
