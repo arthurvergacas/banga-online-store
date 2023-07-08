@@ -37,7 +37,7 @@ export default function ProductManagementBackoffice() {
     }
   };
 
-  const deleteUser = async () => {
+  const deleteProduct = async () => {
     try {
       setSavingProduct(true);
 
@@ -155,14 +155,21 @@ export default function ProductManagementBackoffice() {
         </div>
 
         <div className={styles.row} style={{ justifyContent: 'center' }}>
-          <Input label="Estoque" useFormProps={useFormProps} required name="stock" type="number" placeholder="XX" />
+          <Input
+            label="Estoque"
+            useFormProps={useFormProps}
+            required
+            name="stock"
+            type="number"
+            placeholder="XX"
+          />
         </div>
 
         <Button type="submit" disabled={savingProduct} className={styles.saveButton}>
           {savingProduct ? <Spinner height="30px" /> : <>Salvar</>}
         </Button>
 
-        <UnderlinedButton className={styles.deleteButton} onClick={deleteUser}>
+        <UnderlinedButton className={styles.deleteButton} onClick={deleteProduct}>
           Deletar Produto
         </UnderlinedButton>
 
