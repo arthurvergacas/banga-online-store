@@ -2,7 +2,7 @@ import { User, UserRequest } from '@banga/types/user';
 
 import sleep from './sleep';
 import { Login } from '@banga/types/login';
-import { loggedUser, mockUsers } from './mockUsers';
+import { loggedUser } from './mockUsers';
 
 let userSessionCreated = false;
 
@@ -35,32 +35,6 @@ const UserService = {
     await sleep();
 
     userSessionCreated = true;
-  },
-
-  getAll: async (): Promise<User[]> => {
-    await sleep();
-
-    return mockUsers;
-  },
-
-  getById: async (userId: User['id']): Promise<User | undefined> => {
-    await sleep();
-
-    return mockUsers.find((user) => user.id === userId);
-  },
-
-  save: async (userData: User): Promise<void> => {
-    await sleep();
-
-    const userIndex = mockUsers.findIndex((user) => user.id === userData.id);
-    mockUsers[userIndex] = userData;
-  },
-
-  delete: async (userId: User['id']): Promise<void> => {
-    await sleep();
-
-    const userIndex = mockUsers.findIndex((user) => user.id === userId);
-    mockUsers.splice(userIndex, 1);
   },
 };
 
