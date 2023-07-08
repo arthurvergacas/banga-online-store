@@ -1,18 +1,19 @@
 import { Product, ProductRequest } from '@banga/types/product';
 import sleep from './sleep';
-import { mockProducts } from './mockProducts';
+import api from './api';
 
 const ProductService = {
   getAll: async (): Promise<Product[]> => {
-    await sleep();
-    return mockProducts;
+    const { data } = await api.get('/products');
+    return data;
   },
 
   getById: async (productId: Product['id']): Promise<Product | undefined> => {
-    await sleep();
-    return mockProducts.find((product) => product.id === productId);
+    const { data } = await api.get(`/products/${productId}`);
+    return data;
   },
 
+  // TODO lidar com arquivos
   createProduct: async (product: ProductRequest): Promise<void> => {
     await sleep();
   },
@@ -22,10 +23,7 @@ const ProductService = {
   },
 
   delete: async (productId: Product['id']): Promise<void> => {
-    await sleep();
-
-    const productIndex = mockProducts.findIndex((product) => product.id === productId);
-    mockProducts.splice(productIndex, 1);
+    api.delete(`/products/${productId}`);
   },
 };
 
