@@ -1,15 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+import { guardedRoute } from './middlewares/authGuard';
 
 import Product from './models/product';
 import User from './models/user';
 import Payment from './models/payment';
 import Login from './models/login';
-import Cart from './models/cart';
 
 import CredentialsManager from './services/credentialsManager';
-import { randomUUID } from 'crypto';
+import { JWT_SECRET } from './constants/authConstants';
 
 const app = express();
 app.use(express.json());
@@ -29,7 +29,7 @@ mongoose
 // Products ------
 
 // Fetch all products
-app.get('/products', async (req, res) => {
+app.get('/products', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -54,10 +54,8 @@ app.get('/products/:id', async (req, res) => {
 app.post('/products', async (req, res) => {
   try {
     const productPayload = req.body;
-    productPayload.id = randomUUID();
     const product = new Product(productPayload);
     const savedProduct = await product.save();
-    console.log('saved the thing!!!!');
     res.status(201).json(savedProduct);
   } catch (error) {
     res.status(500).json({ error: 'Error creating product' });
@@ -70,7 +68,7 @@ app.put('/products/:id', async (req, res) => {
     const productID = req.params.id;
     const updatePayload = req.body;
     delete updatePayload['id'];
-    const product = await Product.findOneAndUpdate({ id: productID }, updatePayload, { new: true });
+    const product = await Product.findByIdAndUpdate(productID, updatePayload, { new: true });
     if (product) res.json(product);
     else res.status(404).json({ error: 'Product not found' });
   } catch (error) {
@@ -82,7 +80,7 @@ app.put('/products/:id', async (req, res) => {
 app.delete('/products/:id', async (req, res) => {
   try {
     const productID = req.params.id;
-    const product = await Product.findOneAndDelete({ id: productID });
+    const product = await Product.findByIdAndDelete(productID);
     if (product) res.sendStatus(204);
     else res.status(404).json({ error: 'Product not found' });
   } catch (error) {
@@ -106,7 +104,7 @@ app.get('/users', async (req, res) => {
 app.get('/users/:id', async (req, res) => {
   try {
     const userID = req.params.id;
-    const user = await User.findOne({ id: userID });
+    const user = await User.findById(userID);
     if (user) res.json(user);
     else res.status(404).json({ error: 'User not found' });
   } catch (error) {
@@ -118,7 +116,6 @@ app.get('/users/:id', async (req, res) => {
 app.post('/users', async (req, res) => {
   try {
     const userPayload = req.body;
-    userPayload.id = randomUUID();
     const user = new User(userPayload);
     const savedUser = await user.save();
     res.status(201).json(savedUser);
@@ -133,7 +130,7 @@ app.put('/users/:id', async (req, res) => {
     const userID = req.params.id;
     const updatePayload = req.body;
     delete updatePayload['id'];
-    const user = await User.findOneAndUpdate({ id: userID }, updatePayload, { new: true });
+    const user = await User.findByIdAndUpdate(userID, updatePayload, { new: true });
     if (user) res.json(user);
     else res.status(404).json({ error: 'User not found' });
   } catch (error) {
@@ -145,7 +142,7 @@ app.put('/users/:id', async (req, res) => {
 app.delete('/users/:id', async (req, res) => {
   try {
     const userID = req.params.id;
-    const user = await User.findOneAndDelete({ id: userID });
+    const user = await User.findByIdAndDelete(userID);
     if (user) res.sendStatus(204);
     else res.status(404).json({ error: 'User not found' });
   } catch (error) {
@@ -159,7 +156,6 @@ app.delete('/users/:id', async (req, res) => {
 app.post('/payments/', async (req, res) => {
   try {
     const paymentDetailsPayload = req.body;
-    paymentDetailsPayload.userID = randomUUID();
     const payment = new Payment(paymentDetailsPayload);
     const savedPayment = await payment.save();
     res.status(201).json(savedPayment);
@@ -174,7 +170,6 @@ app.post('/payments/', async (req, res) => {
 app.post('/signin', async (req, res) => {
   try {
     const userPayload = req.body;
-    userPayload.id = randomUUID();
     userPayload.password = CredentialsManager.encryptPassword(userPayload.password);
     const user = new User(userPayload);
     const savedUser = await user.save();
@@ -182,12 +177,12 @@ app.post('/signin', async (req, res) => {
     const credentials = new Login({
       email: savedUser.email,
       password: savedUser.password,
-      userID: savedUser.id,
+      userID: savedUser._id,
     });
 
     const savedLogin = await credentials.save();
     const token = jwt.sign(
-      { userId: savedLogin.id, email: savedLogin.email },
+      { userId: savedLogin.userID, email: savedLogin.email },
       'meudeuseuprecisodeferias'
     );
 
@@ -210,10 +205,7 @@ app.post('/login', async (req, res) => {
     if (credentials.password !== encryptedPassword)
       res.status(401).json({ error: 'Invalid credentials. Rectify provided data and try again.' });
 
-    const token = jwt.sign(
-      { userId: credentials.id, email: credentials.email },
-      'meudeuseuprecisodeferias'
-    );
+    const token = jwt.sign({ userId: credentials.userID, email: credentials.email }, JWT_SECRET);
 
     res.status(200).json({
       success: true,

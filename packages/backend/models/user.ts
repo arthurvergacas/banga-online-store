@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 const UserSchema: Schema = new Schema({
-  id: { type: String, required: true },
   isAdmin: { type: Boolean, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
