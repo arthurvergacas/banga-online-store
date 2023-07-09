@@ -48,7 +48,7 @@ app.get('/products', async (req, res) => {
 app.get('/products/:id', async (req, res) => {
   try {
     const productID = req.params.id;
-    const product = await Product.findOne({ id: productID });
+    const product = await Product.findById(productID);
     if (product) res.json(product);
     else res.status(404).json({ error: 'Product not found' });
   } catch (error) {
