@@ -46,7 +46,7 @@ export default function Cart() {
       <div className={styles.container}>
         <h1>Carrinho</h1>
 
-        <p className={styles.noProductsMessage}>Sem produtos no carrinho.</p>
+        <p className="noItemsMessage">Sem produtos no carrinho.</p>
 
         <Button onClick={() => navigate('/')}>Voltar para a página inicial.</Button>
       </div>

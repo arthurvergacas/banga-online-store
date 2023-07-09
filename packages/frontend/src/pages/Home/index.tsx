@@ -18,6 +18,10 @@ export default function Home() {
     getProducts();
   }, []);
 
+  if (products?.length === 0) {
+    return <p className="noItemsMessage">Nenhum produto encontrado.</p>;
+  }
+
   return (
     <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (

@@ -113,3 +113,10 @@ input[type='number'] {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.noItemsMessage {
+  margin: auto;
+
+  font-size: 1.25rem;
+  text-align: center;
+}
