@@ -21,8 +21,8 @@ function guardedRoute(options?: {
         const userData = await user.findById(jwtPayload.userId);
         if (!userData!.isAdmin) return sendUnauthorizedError(res);
       }
+      req.body.userID = jwtPayload.userId;
     } catch (e) {
-      console.log(e);
       return sendUnauthenticatedError(res);
     }
 

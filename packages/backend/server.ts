@@ -13,6 +13,8 @@ import { JWT_SECRET } from './constants/authConstants';
 import { guardedRoute } from './middlewares/authGuard';
 import { upload } from './file-upload/multer';
 import { uploadToCloudinary } from './file-upload/cloudinary';
+import { PaymentRequest } from '@banga/types/payment';
+import product from './models/product';
 
 const app = express();
 app.use(express.json());
@@ -204,9 +206,18 @@ app.delete('/users/:id', guardedRoute({ adminOnly: true }), async (req, res) => 
 // Add payment details to already existing user by user ID
 app.post('/payments/', guardedRoute(), async (req, res) => {
   try {
-    const paymentDetailsPayload = req.body;
-    const payment = new Payment(paymentDetailsPayload);
+    const paymentPayload: PaymentRequest = req.body;
+    const payment = new Payment(paymentPayload);
     const savedPayment = await payment.save();
+
+    paymentPayload.products.forEach(async (productBought) => {
+      const product = await Product.findById(productBought._id);
+      if (!product) return;
+
+      product.stock -= productBought.quantity;
+      product.save();
+    });
+
     res.status(201).json(savedPayment);
   } catch (error) {
     res.status(500).json({ error: 'Error creating payment data', msg: error });

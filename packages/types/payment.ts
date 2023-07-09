@@ -7,7 +7,6 @@ export interface PaymentInfo {
   cvv: number;
 }
 
-export interface PaymentRequest {
-  paymentInfo: PaymentInfo;
+export interface PaymentRequest extends PaymentInfo {
   products: ProductCart[];
 }
