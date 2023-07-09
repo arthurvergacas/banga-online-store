@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../constants/authConstants';
 import user from '../models/user';
+import { JwtPayload } from '@banga/types/auth';
 
 function guardedRoute(options?: {
   adminOnly: boolean;
@@ -14,7 +15,7 @@ function guardedRoute(options?: {
     const jwtToken = req.headers.authorization.split('Bearer ').at(-1)!;
 
     try {
-      const jwtPayload = jwt.verify(jwtToken, JWT_SECRET) as { userId: string };
+      const jwtPayload = jwt.verify(jwtToken, JWT_SECRET) as JwtPayload;
 
       if (options?.adminOnly) {
         const userData = await user.findById(jwtPayload.userId);

@@ -187,14 +187,11 @@ app.post('/signin', async (req, res) => {
     });
 
     const savedLogin = await credentials.save();
-    const token = jwt.sign(
-      { userId: savedLogin.userID, email: savedLogin.email },
-      'meudeuseuprecisodeferias'
-    );
+    const token = jwt.sign({ userId: savedLogin.userID, userData: savedUser }, JWT_SECRET);
 
     res.status(200).json({
       success: true,
-      data: { token: token, user: savedUser },
+      data: { token: token },
     });
   } catch (error) {
     res.status(500).json({ error: 'Error creating account', msg: error });
@@ -211,9 +208,9 @@ app.post('/login', async (req, res) => {
     if (credentials.password !== encryptedPassword)
       res.status(401).json({ error: 'Invalid credentials. Rectify provided data and try again.' });
 
-    const token = jwt.sign({ userId: credentials.userID, email: credentials.email }, JWT_SECRET);
-
     const user = await User.findById(credentials.userID);
+
+    const token = jwt.sign({ userId: credentials.userID, userData: user }, JWT_SECRET);
 
     res.status(200).json({
       success: true,
