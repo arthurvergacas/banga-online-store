@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import { guardedRoute } from './middlewares/authGuard';
+import cors from 'cors';
 
 import Product from './models/product';
 import User from './models/user';
@@ -10,9 +10,15 @@ import Login from './models/login';
 
 import CredentialsManager from './services/credentialsManager';
 import { JWT_SECRET } from './constants/authConstants';
+import { guardedRoute } from './middlewares/authGuard';
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 // Connecting to MongoDB
 mongoose
