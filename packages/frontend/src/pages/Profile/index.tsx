@@ -40,7 +40,12 @@ export default function Profile({ onLogout }: ProfileProps) {
     return (
       <div
         className={styles.container}
-        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
       >
         <Spinner width="5em" height="5em" />
       </div>
@@ -70,8 +75,8 @@ export default function Profile({ onLogout }: ProfileProps) {
             <div className={styles.profileRow}>
               <span>
                 Data de nascimento:{' '}
-                <time dateTime={new Date(user!.birthDate).toDateString()}>
-                  {new Date(user!.birthDate).toLocaleDateString()}
+                <time dateTime={new Date(`${user!.birthDate}T00:00`).toDateString()}>
+                  {new Date(`${user!.birthDate}T00:00`).toLocaleDateString()}
                 </time>
               </span>
             </div>
