@@ -194,7 +194,7 @@ app.post('/signin', async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: { token: token },
+      data: { token: token, user: savedUser },
     });
   } catch (error) {
     res.status(500).json({ error: 'Error creating account', msg: error });
@@ -213,9 +213,11 @@ app.post('/login', async (req, res) => {
 
     const token = jwt.sign({ userId: credentials.userID, email: credentials.email }, JWT_SECRET);
 
+    const user = await User.findById(credentials.userID);
+
     res.status(200).json({
       success: true,
-      data: { token: token },
+      data: { token: token, user },
     });
   } catch (error) {
     res.status(500).json({ error: 'Error loging in', msg: error });
