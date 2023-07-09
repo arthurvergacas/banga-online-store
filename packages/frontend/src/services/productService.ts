@@ -20,13 +20,20 @@ const ProductService = {
     }
   },
 
-  // TODO lidar com arquivos
   createProduct: async (product: ProductRequest): Promise<void> => {
-    return api.postForm('/products', product);
+    return api.postForm('/products', {
+      ...product,
+      image: product.image[0],
+      audio: product.audio[0],
+    });
   },
 
-  save: async (product: Product): Promise<void> => {
-    return api.putForm('/products', product);
+  save: async (productId: string, product: ProductRequest): Promise<void> => {
+    return api.putForm(`/products/${productId}`, {
+      ...product,
+      image: product.image[0],
+      audio: product.audio[0],
+    });
   },
 
   delete: async (productId: Product['_id']): Promise<void> => {

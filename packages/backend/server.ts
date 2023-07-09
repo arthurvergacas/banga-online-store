@@ -69,15 +69,20 @@ app.post(
 
       const productPayload = req.body;
 
-      // save first to scout for any schema errors
-      await new Product({ ...productPayload, imageUrl: 'temp', audioUrl: 'url' }).save();
+      const product = new Product({
+        ...productPayload,
+        imageUrl: 'temp',
+        audioUrl: 'url',
+      });
+      product.validate();
 
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       const { url: imageUrl } = await uploadToCloudinary(files['image'][0]);
       const { url: audioUrl } = await uploadToCloudinary(files['audio'][0]);
 
-      const product = new Product({ ...productPayload, imageUrl, audioUrl });
+      product.imageUrl = imageUrl;
+      product.audioUrl = audioUrl;
       const savedProduct = await product.save();
 
       res.status(201).json(savedProduct);

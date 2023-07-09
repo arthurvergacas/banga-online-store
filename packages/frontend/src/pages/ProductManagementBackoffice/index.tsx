@@ -14,17 +14,17 @@ export default function ProductManagementBackoffice() {
   const [productLoading, setProductLoading] = useState(true);
   const [savingProduct, setSavingProduct] = useState(false);
 
-  const useFormProps = useForm<Product>({ mode: 'all' });
+  const useFormProps = useForm<ProductRequest>({ mode: 'all' });
 
   const { productId } = useParams();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: Product | ProductRequest) => {
+  const onSubmit = async (data: ProductRequest) => {
     try {
       setSavingProduct(true);
 
-      if (productId !== 'new') await ProductService.save(data as Product);
-      else await ProductService.createProduct(data as ProductRequest);
+      if (productId && productId !== 'new') await ProductService.save(productId, data);
+      else await ProductService.createProduct(data);
 
       navigate('/admin/products');
       return;
@@ -57,7 +57,9 @@ export default function ProductManagementBackoffice() {
   useEffect(() => {
     const populateFormWithProductData = (productData: Product) => {
       for (const key of Object.keys(productData) as (keyof Product)[]) {
-        useFormProps.setValue(key, productData[key]);
+        if (key !== 'imageUrl' && key !== 'audioUrl') {
+          useFormProps.setValue(key, productData[key]);
+        }
       }
     };
 
@@ -135,23 +137,9 @@ export default function ProductManagementBackoffice() {
         </div>
 
         <div className={styles.row}>
-          <Input
-            label="Som"
-            useFormProps={useFormProps}
-            required
-            name="image"
-            type="file"
-            placeholder="XX/XX/XXXX"
-          />
+          <Input label="Imagem" useFormProps={useFormProps} required name="image" type="file" />
 
-          <Input
-            label="Foto"
-            useFormProps={useFormProps}
-            required
-            name="audio"
-            type="file"
-            placeholder="Rua; número; cidade; estado"
-          />
+          <Input label="Áudio" useFormProps={useFormProps} required name="audio" type="file" />
         </div>
 
         <div className={styles.row} style={{ justifyContent: 'center' }}>

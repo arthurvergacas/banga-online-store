@@ -13,4 +13,7 @@ export interface ProductCart extends Product {
   quantity: number;
 }
 
-export type ProductRequest = Omit<Product, 'id'>;
+export interface ProductRequest extends Omit<Product, 'imageUrl' | 'audioUrl'> {
+  image: FileList;
+  audio: FileList;
+}
