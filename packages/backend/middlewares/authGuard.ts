@@ -7,7 +7,7 @@ function guardedRoute(options?: {
   adminOnly: boolean;
 }): (req: Request, res: Response, next: NextFunction) => Promise<void> {
   return async (req, res, next) => {
-    if (!req.headers.authorization) {
+    if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
       return sendUnauthenticatedError(res);
     }
 
