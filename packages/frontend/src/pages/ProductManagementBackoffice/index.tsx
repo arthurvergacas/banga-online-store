@@ -99,7 +99,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Instrumento"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="title"
             type="text"
             placeholder="ex.: Saxofone"
@@ -108,7 +108,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Modelo"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="subtitle"
             type="text"
             placeholder="ex.: Eagle SA500vg"
@@ -119,7 +119,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Preço"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="price"
             type="number"
             step={0.01}
@@ -129,7 +129,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Descrição"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="description"
             type="text"
             placeholder="Descrição"
@@ -137,16 +137,28 @@ export default function ProductManagementBackoffice() {
         </div>
 
         <div className={styles.row}>
-          <Input label="Imagem" useFormProps={useFormProps} required name="image" type="file" />
+          <Input
+            label="Imagem"
+            useFormProps={useFormProps}
+            required={productId === 'new'}
+            name="image"
+            type="file"
+          />
 
-          <Input label="Áudio" useFormProps={useFormProps} required name="audio" type="file" />
+          <Input
+            label="Áudio"
+            useFormProps={useFormProps}
+            required={productId === 'new'}
+            name="audio"
+            type="file"
+          />
         </div>
 
         <div className={styles.row} style={{ justifyContent: 'center' }}>
           <Input
             label="Estoque"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="stock"
             type="number"
             placeholder="XX"

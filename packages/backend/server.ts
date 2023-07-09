@@ -14,7 +14,6 @@ import { guardedRoute } from './middlewares/authGuard';
 import { upload } from './file-upload/multer';
 import { uploadToCloudinary } from './file-upload/cloudinary';
 import { PaymentRequest } from '@banga/types/payment';
-import product from './models/product';
 
 const app = express();
 app.use(express.json());
@@ -108,11 +107,11 @@ app.put(
       const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
 
       if (files) {
-        if (files['image'][0]) {
-          const { url: imgUrl } = await uploadToCloudinary(files['image'][0]);
-          updatePayload.imgUrl = imgUrl;
+        if (files['image'] && files['image'][0]) {
+          const { url: imageUrl } = await uploadToCloudinary(files['image'][0]);
+          updatePayload.imageUrl = imageUrl;
         }
-        if (files['audio'][0]) {
+        if (files['audio'] && files['audio'][0]) {
           const { url: audioUrl } = await uploadToCloudinary(files['audio'][0]);
           updatePayload.audioUrl = audioUrl;
         }
@@ -122,6 +121,7 @@ app.put(
       if (product) res.json(product);
       else res.status(404).json({ error: 'Product not found' });
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: 'Error updating product' });
     }
   }
