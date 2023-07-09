@@ -5,6 +5,7 @@ import { Login, AuthResponse } from '@banga/types/login';
 import api from './api';
 import { parseJwt } from 'utils/parseJwt';
 import StorageService, { StorageKeys } from './storageService';
+import CartService from './cartService';
 
 const UserService = {
   getUserData: async (): Promise<User> => {
@@ -41,6 +42,7 @@ const UserService = {
   },
 
   logout: async (): Promise<void> => {
+    CartService.clearCart();
     StorageService.set(StorageKeys.JWT_TOKEN, null);
   },
 };

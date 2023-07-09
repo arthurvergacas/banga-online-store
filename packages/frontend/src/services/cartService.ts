@@ -7,7 +7,7 @@ const CartService = {
   },
 
   addToCart: (product: Product): void => {
-    const cartProducts = StorageService.get<ProductCart[]>(StorageKeys.CART);
+    const cartProducts = StorageService.get<ProductCart[]>(StorageKeys.CART) ?? [];
 
     cartProducts.push({ ...product, quantity: 1 });
 
