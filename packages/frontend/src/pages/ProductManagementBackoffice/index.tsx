@@ -169,9 +169,11 @@ export default function ProductManagementBackoffice() {
           {savingProduct ? <Spinner height="30px" /> : <>Salvar</>}
         </Button>
 
-        <UnderlinedButton className={styles.deleteButton} onClick={deleteProduct}>
-          Deletar Produto
-        </UnderlinedButton>
+        {productId !== 'new' && (
+          <UnderlinedButton className={styles.deleteButton} onClick={deleteProduct}>
+            Deletar Produto
+          </UnderlinedButton>
+        )}
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>
