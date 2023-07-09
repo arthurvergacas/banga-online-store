@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 import Product from './models/product';
 import User from './models/user';
@@ -125,17 +126,7 @@ app.delete('/users/:id', async (req, res) => {
   } catch (error) { res.status(500).json({error: 'Error deleting user'}); }
 });
 
-// User Payment Details ------
-
-// Fetch a user's payment details by user ID
-app.get('/payments/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const payment = await Payment.findOne({userID});
-    if (payment) res.json(payment);
-    else res.status(404).json({error: 'Payment data not found'});
-  } catch (error) { res.status(500).json({error: 'Error fetching payment data'}); }
-});
+// Payment ------
 
 // Add payment details to already existing user by user ID
 app.post('/payments/', async (req, res) => {
@@ -149,98 +140,60 @@ app.post('/payments/', async (req, res) => {
                                           "msg": error}); }
 });
 
-// Edit a user's payment details
-app.put('/payments/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const payment = await Payment.findOneAndUpdate({userID}, req.body, {new: true});
-    if (payment) res.json(payment);
-    else res.status(404).json({error: 'Payment data not found'});
-  } catch (error) { res.status(500).json({error: 'Error updating payment data'}); }
-});
-
-// Delete a user's payment details by user ID
-app.delete('/payments/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const payment = await Payment.findOneAndDelete({userID});
-    if (payment) res.sendStatus(204);
-    else res.status(404).json({error: 'Payment data not found'});
-  } catch (error) { res.status(500).json({error: 'Error deleting payment data'}); }
-});
-
 // User Credentials ------
 
-// Fetch user's credentials by email
-app.get('/credentials/:email', async (req, res) => {
+// Sign in
+app.post('/signin', async (req, res) => {
   try {
-    const credentials = await Login.findOne({'email': req.params.email});
-    if (credentials) res.json(credentials);
-    else res.status(404).json({error: 'Credentials not found'});
-  } catch (error) { res.status(500).json({error: 'Error fetching credentials'}); }
-});
+    const userPayload = req.body;
+    userPayload.id = randomUUID();
+    userPayload.password = CredentialsManager.encryptPassword(userPayload.password);
+    const user = new User(userPayload);
+    const savedUser = await user.save();
 
-// Create user's credentials
-app.post('/credentials', async (req, res) => {
-  try {
-    const credentials = new Login(req.body);
-    credentials.password = CredentialsManager.encryptPassword(credentials.password);
+    const credentials = new Login(
+      {'email': savedUser.email,
+       'password': savedUser.password,
+       'userID': savedUser.id}
+    );
+
     const savedLogin = await credentials.save();
-    res.status(201).json(savedLogin);
-  } catch (error) { res.status(500).json({error: 'Error creating credentials'}); }
+    const token = jwt.sign(
+      { userId: savedLogin.id, email: savedLogin.email },
+      "meudeuseuprecisodeferias"
+    );
+
+    res
+    .status(200)
+    .json({
+      success: true,
+      data: {token: token},
+    });
+  } catch (error) { res.status(500).json({error: 'Error creating account', 'msg': error}); }
 });
 
-// Remove user's credentials by user ID
-app.delete('/credentials/:id', async (req, res) => {
+// Login
+app.post('/login', async (req, res) => {
   try {
-    const userID = req.params.id;
-    const login = await Login.findOneAndDelete({userID});
-    if (login) res.sendStatus(204);
-    else res.status(404).json({error: 'Credentials not found'});
-  } catch (error) { res.status(500).json({error: 'Error deleting credentials'}); }
-});
+    const credentials = await Login.findOne({'email': req.body.email});
+    if (credentials == null) return res.status(401).json({error: 'Unexisting user.'});
 
-// User Carts ------
+    const encryptedPassword = CredentialsManager.encryptPassword(req.body.password);
+    if (credentials.password !== encryptedPassword)
+      res.status(401).json({error: 'Invalid credentials. Rectify provided data and try again.'});
 
-// Fetch user's cart status by user ID
-app.get('/carts/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const cart = await Cart.findOne({userID});
-    if (cart) res.json(cart);
-    else res.status(404).json({error: 'Cart not found'});
-  } catch (error) { res.status(500).json({error: 'Error fetching cart'}); }
-});
+    const token = jwt.sign(
+      { userId: credentials.id, email: credentials.email },
+      "meudeuseuprecisodeferias"
+    );
 
-// Create cart for already existing user by user ID
-app.post('/carts/:id', async (req, res) => {
-  try {
-    const cartPayload = req.body;
-    cartPayload.userID = req.params.id;
-    const cart = new Cart(cartPayload);
-    const savedCart = await cart.save();
-    res.status(201).json(savedCart);
-  } catch (error) { res.status(500).json({error: 'Error creating cart', "msg": error}); }
-});
-
-// Update user's cart by user ID
-app.put('/carts/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const cart = await Cart.findOneAndUpdate({userID}, req.body, {new: true});
-    if (cart) res.json(cart);
-    else res.status(404).json({error: 'Cart not found'});
-  } catch (error) { res.status(500).json({error: 'Error updating cart'}); }
-});
-
-// Delete user's cart by user ID
-app.delete('/carts/:id', async (req, res) => {
-  try {
-    const userID = req.params.id;
-    const cart = await Cart.findOneAndDelete({userID});
-    if (cart) res.sendStatus(204);
-    else res.status(404).json({error: 'Cart not found'});
-  } catch (error) { res.status(500).json({error: 'Error deleting cart'}); }
+    res
+    .status(200)
+    .json({
+      success: true,
+      data: {token: token},
+    });
+  } catch (error) { res.status(500).json({error: 'Error loging in', 'msg': error}); }
 });
 
 app.listen(3000, () => {console.log('Server started on port 3000');});
