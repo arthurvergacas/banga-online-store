@@ -67,6 +67,18 @@ export default function Cart() {
     if (shouldUpdate) getProductsWithoutLoading();
   }, [shouldUpdate]);
 
+  if (products?.length === 0) {
+    return (
+      <div className={styles.container}>
+        <h1>Carrinho</h1>
+
+        <p className={styles.noProductsMessage}>Sem produtos no carrinho.</p>
+
+        <Button onClick={() => navigate('/')}>Voltar para a página inicial.</Button>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <h1>Carrinho</h1>
