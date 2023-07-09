@@ -57,7 +57,7 @@ app.get('/products/:id', async (req, res) => {
 });
 
 // Register new product
-app.post('/products', async (req, res) => {
+app.post('/products', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const productPayload = req.body;
     const product = new Product(productPayload);
@@ -69,7 +69,7 @@ app.post('/products', async (req, res) => {
 });
 
 // Edit product by product ID
-app.put('/products/:id', async (req, res) => {
+app.put('/products/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const productID = req.params.id;
     const updatePayload = req.body;
@@ -83,7 +83,7 @@ app.put('/products/:id', async (req, res) => {
 });
 
 // Delete product by product ID
-app.delete('/products/:id', async (req, res) => {
+app.delete('/products/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const productID = req.params.id;
     const product = await Product.findByIdAndDelete(productID);
@@ -97,7 +97,7 @@ app.delete('/products/:id', async (req, res) => {
 // User Profile ------
 
 // Fetch all users' profiles
-app.get('/users', async (req, res) => {
+app.get('/users', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -107,7 +107,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Fetch user profile by user ID
-app.get('/users/:id', async (req, res) => {
+app.get('/users/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const userID = req.params.id;
     const user = await User.findById(userID);
@@ -119,7 +119,7 @@ app.get('/users/:id', async (req, res) => {
 });
 
 // Create new user
-app.post('/users', async (req, res) => {
+app.post('/users', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const userPayload = req.body;
     const user = new User(userPayload);
@@ -131,7 +131,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Edit user's profile by user ID
-app.put('/users/:id', async (req, res) => {
+app.put('/users/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const userID = req.params.id;
     const updatePayload = req.body;
@@ -145,7 +145,7 @@ app.put('/users/:id', async (req, res) => {
 });
 
 // Delete a user by user ID
-app.delete('/users/:id', async (req, res) => {
+app.delete('/users/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
   try {
     const userID = req.params.id;
     const user = await User.findByIdAndDelete(userID);
@@ -159,7 +159,7 @@ app.delete('/users/:id', async (req, res) => {
 // Payment ------
 
 // Add payment details to already existing user by user ID
-app.post('/payments/', async (req, res) => {
+app.post('/payments/', guardedRoute(), async (req, res) => {
   try {
     const paymentDetailsPayload = req.body;
     const payment = new Payment(paymentDetailsPayload);
