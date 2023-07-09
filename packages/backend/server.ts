@@ -29,7 +29,7 @@ mongoose
 // Products ------
 
 // Fetch all products
-app.get('/products', guardedRoute({ adminOnly: true }), async (req, res) => {
+app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
