@@ -77,6 +77,7 @@ export default function ProductDetails() {
 
           <div id={styles.productBuyButtonContainer}>
             <strong>R$ {product?.price.toLocaleString()}</strong>
+
             <Button onClick={addToCart} disabled={addingProductToCart}>
               {addingProductToCart ? (
                 <Spinner width="10%" height="none" />
@@ -84,6 +85,7 @@ export default function ProductDetails() {
                 <>ADICIONAR AO CARRINHO</>
               )}
             </Button>
+            <small>Em estoque: {product?.stock}</small>
           </div>
         </div>
 

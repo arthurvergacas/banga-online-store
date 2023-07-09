@@ -23,7 +23,9 @@ export default function CartProductCard({
   onRemove,
   onQuantityChange,
 }: CartProductCardProps) {
-  const [quantity, setQuantity] = useState(product.quantity);
+  const [quantity, setQuantity] = useState<number | undefined>(
+    Math.min(product.quantity, product.stock)
+  );
   const [removing, setRemoving] = useState(false);
 
   const removeFromCart = async () => {
@@ -33,7 +35,9 @@ export default function CartProductCard({
     onRemove();
   };
 
-  useEffect(() => onQuantityChange(quantity), [onQuantityChange, quantity]);
+  useEffect(() => {
+    if (quantity && quantity > 0) onQuantityChange(quantity);
+  }, [onQuantityChange, quantity]);
 
   return (
     <Link to={to ?? `/product/${product._id}`} className={styles.productCardLink}>
@@ -67,11 +71,16 @@ export default function CartProductCard({
               value={quantity}
               onChange={(event) =>
                 setQuantity((prev) => {
-                  const newQuantity = parseInt(event.target.value || prev.toString());
+                  if (!event.target.value) return undefined;
+                  const newQuantity = parseInt(event.target.value || prev?.toString() || '0');
                   return newQuantity > 0 ? newQuantity : prev;
                 })
               }
               onClick={(event) => (event.target as HTMLInputElement).select()}
+              onBlur={() => {
+                if (!quantity) setQuantity(1);
+                else if (quantity >= product.stock) setQuantity(product.stock);
+              }}
             />
           </div>
 
