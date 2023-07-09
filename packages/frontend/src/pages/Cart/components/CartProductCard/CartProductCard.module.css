@@ -44,6 +44,8 @@
 }
 
 .productCard strong {
+  text-align: right;
+
   font-weight: 600;
 }
 
