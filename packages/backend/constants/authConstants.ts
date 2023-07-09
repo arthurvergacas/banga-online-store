@@ -1,3 +1,1 @@
-const JWT_SECRET = 'meudeuseuprecisodeferias';
-
-export { JWT_SECRET };
+export const JWT_SECRET = 'meudeuseuprecisodeferias';

@@ -11,6 +11,8 @@ import Login from './models/login';
 import CredentialsManager from './services/credentialsManager';
 import { JWT_SECRET } from './constants/authConstants';
 import { guardedRoute } from './middlewares/authGuard';
+import { upload } from './file-upload/multer';
+import { uploadToCloudinary } from './file-upload/cloudinary';
 
 const app = express();
 app.use(express.json());
@@ -57,30 +59,66 @@ app.get('/products/:id', async (req, res) => {
 });
 
 // Register new product
-app.post('/products', guardedRoute({ adminOnly: true }), async (req, res) => {
-  try {
-    const productPayload = req.body;
-    const product = new Product(productPayload);
-    const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating product' });
+app.post(
+  '/products',
+  guardedRoute({ adminOnly: true }),
+  upload.fields([{ name: 'image' }, { name: 'audio' }]),
+  async (req, res) => {
+    try {
+      if (!req.files) return res.status(400).json({ error: 'Missing image and audio files' });
+
+      const productPayload = req.body;
+
+      // save first to scout for any schema errors
+      await new Product({ ...productPayload, imageUrl: 'temp', audioUrl: 'url' }).save();
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+      const { url: imageUrl } = await uploadToCloudinary(files['image'][0]);
+      const { url: audioUrl } = await uploadToCloudinary(files['audio'][0]);
+
+      const product = new Product({ ...productPayload, imageUrl, audioUrl });
+      const savedProduct = await product.save();
+
+      res.status(201).json(savedProduct);
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating product', msg: error });
+    }
   }
-});
+);
 
 // Edit product by product ID
-app.put('/products/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
-  try {
-    const productID = req.params.id;
-    const updatePayload = req.body;
-    delete updatePayload['id'];
-    const product = await Product.findByIdAndUpdate(productID, updatePayload, { new: true });
-    if (product) res.json(product);
-    else res.status(404).json({ error: 'Product not found' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error updating product' });
+app.put(
+  '/products/:id',
+  guardedRoute({ adminOnly: true }),
+  upload.fields([{ name: 'image' }, { name: 'audio' }]),
+  async (req, res) => {
+    try {
+      const productID = req.params.id;
+      const updatePayload = req.body;
+      delete updatePayload['id'];
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+
+      if (files) {
+        if (files['image'][0]) {
+          const { url: imgUrl } = await uploadToCloudinary(files['image'][0]);
+          updatePayload.imgUrl = imgUrl;
+        }
+        if (files['audio'][0]) {
+          const { url: audioUrl } = await uploadToCloudinary(files['audio'][0]);
+          updatePayload.audioUrl = audioUrl;
+        }
+      }
+
+      const product = await Product.findByIdAndUpdate(productID, updatePayload, { new: true });
+      if (product) res.json(product);
+      else res.status(404).json({ error: 'Product not found' });
+    } catch (error) {
+      res.status(500).json({ error: 'Error updating product' });
+    }
   }
-});
+);
 
 // Delete product by product ID
 app.delete('/products/:id', guardedRoute({ adminOnly: true }), async (req, res) => {
