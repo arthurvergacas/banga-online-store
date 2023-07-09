@@ -1,40 +1,47 @@
 import { User, UserRequest } from '@banga/types/user';
 
-import sleep from './sleep';
-import { Login } from '@banga/types/login';
-import { loggedUser } from './mockUsers';
-
-let userSessionCreated = false;
+import { JwtPayload } from '@banga/types/auth';
+import { Login, AuthResponse } from '@banga/types/login';
+import api from './api';
+import { parseJwt } from 'utils/parseJwt';
+import StorageService, { StorageKeys } from './storageService';
 
 const UserService = {
   getUserData: async (): Promise<User> => {
-    await sleep();
-    return loggedUser;
+    const payload = parseJwt<JwtPayload>(StorageService.get(StorageKeys.JWT_TOKEN));
+    return payload.userData;
   },
 
   isUserLoggedIn: (): boolean => {
-    return userSessionCreated;
+    return !!StorageService.get(StorageKeys.JWT_TOKEN);
   },
 
   login: async (loginData: Login): Promise<void> => {
-    await sleep();
+    try {
+      const {
+        data: { token },
+      } = await api.post<AuthResponse>('/login', loginData);
 
-    if (loggedUser.email !== loginData.email || loginData.password !== '123')
+      StorageService.set(StorageKeys.JWT_TOKEN, token);
+    } catch {
       throw Error('Não foi possível realizar o login. Verifique seus dados e tente novamente.');
-
-    userSessionCreated = true;
-  },
-
-  logout: async (): Promise<void> => {
-    await sleep();
-
-    userSessionCreated = false;
+    }
   },
 
   signUp: async (signUpData: UserRequest): Promise<void> => {
-    await sleep();
+    try {
+      const {
+        data: { token },
+      } = await api.post<AuthResponse>('/signin', { ...signUpData, isAdmin: false });
 
-    userSessionCreated = true;
+      StorageService.set(StorageKeys.JWT_TOKEN, token);
+    } catch {
+      throw Error('Não foi possível realizar o cadastro. Verifique seus dados e tente novamente.');
+    }
+  },
+
+  logout: async (): Promise<void> => {
+    StorageService.set(StorageKeys.JWT_TOKEN, null);
   },
 };
 

@@ -1,5 +1,6 @@
 export enum StorageKeys {
   CART = 'cart',
+  JWT_TOKEN = 'jwtToken',
 }
 
 const StorageService = {

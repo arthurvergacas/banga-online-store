@@ -190,8 +190,7 @@ app.post('/signin', async (req, res) => {
     const token = jwt.sign({ userId: savedLogin.userID, userData: savedUser }, JWT_SECRET);
 
     res.status(200).json({
-      success: true,
-      data: { token: token },
+      token: token,
     });
   } catch (error) {
     res.status(500).json({ error: 'Error creating account', msg: error });
@@ -213,8 +212,7 @@ app.post('/login', async (req, res) => {
     const token = jwt.sign({ userId: credentials.userID, userData: user }, JWT_SECRET);
 
     res.status(200).json({
-      success: true,
-      data: { token: token, user },
+      token,
     });
   } catch (error) {
     res.status(500).json({ error: 'Error loging in', msg: error });
