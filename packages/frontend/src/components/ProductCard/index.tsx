@@ -11,7 +11,7 @@ export interface ProductCardProps {
 
 export default function ProductCard({ product, to }: ProductCardProps) {
   return (
-    <Link to={to ?? `/product/${product.id}`} className={styles.productCardLink}>
+    <Link to={to ?? `/product/${product._id}`} className={styles.productCardLink}>
       <div className={styles.productCard}>
         <header>
           <div>

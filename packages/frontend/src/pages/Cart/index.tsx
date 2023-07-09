@@ -27,7 +27,7 @@ export default function Cart() {
     );
   };
 
-  const updatePurchaseItem = (productId: ProductCart['id'], quantity: number) => {
+  const updatePurchaseItem = (productId: ProductCart['_id'], quantity: number) => {
     const index = purchaseItens?.findIndex((item) => item.productId === productId);
 
     if (index !== -1)
@@ -48,7 +48,7 @@ export default function Cart() {
 
       setProducts(productsInCart);
       productsInCart.forEach((product) =>
-        setPurchaseItens((prev) => [...prev, { productId: product.id, quantity: 1 }])
+        setPurchaseItens((prev) => [...prev, { productId: product._id, quantity: 1 }])
       );
 
       setProductsLoading(false);
@@ -78,9 +78,9 @@ export default function Cart() {
           products?.map((product) => (
             <CartProductCard
               product={product}
-              key={product.id}
+              key={product._id}
               onRemove={() => setShouldUpdate(true)}
-              onQuantityChange={(quantity) => updatePurchaseItem(product.id, quantity)}
+              onQuantityChange={(quantity) => updatePurchaseItem(product._id, quantity)}
             />
           ))
         )}

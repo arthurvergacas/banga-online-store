@@ -27,7 +27,7 @@ export default function UserBackoffice() {
         {usersLoading ? (
           <Spinner width="30%" height="30%" />
         ) : (
-          users?.map((user) => <UserCard user={user} key={user.id} />)
+          users?.map((user) => <UserCard user={user} key={user._id} />)
         )}
       </div>
     </div>

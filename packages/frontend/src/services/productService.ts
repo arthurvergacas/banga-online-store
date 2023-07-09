@@ -11,7 +11,7 @@ const ProductService = {
     }
   },
 
-  getById: async (productId: Product['id']): Promise<Product | undefined> => {
+  getById: async (productId: Product['_id']): Promise<Product | undefined> => {
     try {
       const { data } = await api.get(`/products/${productId}`);
       return data;
@@ -29,7 +29,7 @@ const ProductService = {
     return api.putForm('/products', product);
   },
 
-  delete: async (productId: Product['id']): Promise<void> => {
+  delete: async (productId: Product['_id']): Promise<void> => {
     return api.delete(`/products/${productId}`);
   },
 };

@@ -7,16 +7,16 @@ const ProfileService = {
     return data;
   },
 
-  getById: async (userId: User['id']): Promise<User | undefined> => {
+  getById: async (userId: User['_id']): Promise<User | undefined> => {
     const { data } = await api.get(`/users/${userId}`);
     return data;
   },
 
   save: async (userData: User): Promise<void> => {
-    return api.put(`/users/${userData.id}`, userData);
+    return api.put(`/users/${userData._id}`, userData);
   },
 
-  delete: async (userId: User['id']): Promise<void> => {
+  delete: async (userId: User['_id']): Promise<void> => {
     return api.delete(`/users/${userId}`);
   },
 };

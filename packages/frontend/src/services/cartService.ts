@@ -14,10 +14,10 @@ const CartService = {
     StorageService.set(StorageKeys.CART, cartProducts);
   },
 
-  removeFromCart: (id: Product['id']): void => {
+  removeFromCart: (id: Product['_id']): void => {
     const cartProducts = StorageService.get<ProductCart[]>(StorageKeys.CART);
 
-    const index = cartProducts.findIndex((p) => p.id === id);
+    const index = cartProducts.findIndex((p) => p._id === id);
     cartProducts.splice(index, 1);
 
     StorageService.set(StorageKeys.CART, cartProducts);

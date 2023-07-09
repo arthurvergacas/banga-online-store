@@ -28,7 +28,7 @@ export default function CartProductCard({
 
   const removeFromCart = async () => {
     setRemoving(true);
-    CartService.removeFromCart(product.id);
+    CartService.removeFromCart(product._id);
 
     onRemove();
   };
@@ -36,7 +36,7 @@ export default function CartProductCard({
   useEffect(() => onQuantityChange(quantity), [onQuantityChange, quantity]);
 
   return (
-    <Link to={to ?? `/product/${product.id}`} className={styles.productCardLink}>
+    <Link to={to ?? `/product/${product._id}`} className={styles.productCardLink}>
       <div className={styles.productCard}>
         <header>
           <div>

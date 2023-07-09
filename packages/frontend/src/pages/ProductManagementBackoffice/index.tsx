@@ -41,7 +41,7 @@ export default function ProductManagementBackoffice() {
     try {
       setSavingProduct(true);
 
-      await ProductService.delete(useFormProps.getValues().id);
+      await ProductService.delete(useFormProps.getValues()._id);
 
       navigate('/admin/products');
       return;

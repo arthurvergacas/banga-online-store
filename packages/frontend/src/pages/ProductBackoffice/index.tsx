@@ -37,7 +37,9 @@ export default function ProductBackoffice() {
         {productsLoading ? (
           <Spinner width="30%" height="30%" />
         ) : (
-          products?.map((product) => <ProductCard to={`${product.id}`} product={product} key={product.id} />)
+          products?.map((product) => (
+            <ProductCard to={`${product._id}`} product={product} key={product._id} />
+          ))
         )}
       </div>
     </div>

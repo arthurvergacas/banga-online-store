@@ -23,7 +23,7 @@ export default function Home() {
       {productsLoading ? (
         <Spinner width="30%" height="30%" />
       ) : (
-        products?.map((product) => <ProductCard product={product} key={product.id} />)
+        products?.map((product) => <ProductCard product={product} key={product._id} />)
       )}
     </div>
   );
