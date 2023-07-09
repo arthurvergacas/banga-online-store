@@ -44,6 +44,7 @@
 }
 
 .productCard strong {
+  white-space: nowrap;
   text-align: right;
 
   font-weight: 600;
