@@ -121,7 +121,9 @@ And, inside the cloned folder:
 `git pull origin main`
 
 After this, the following steps are extremely similar to any other simple React application:
-`npm install && npm run start:frontend`
+ - Run `npm install`
+ - In one terminal/prompt, type in `npm run start:backend` - this will start our application's API
+ - In another one, type in `npm run start:frontend` - and this will get our website up
 
 ## Problems
 
