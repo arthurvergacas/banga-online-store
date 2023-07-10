@@ -102,11 +102,87 @@ Our code respects common organization practices for any React application.
 
 ## Test Plan
 
-In our current development process, we have primarily relied on simple manual tests to ensure the functionality and stability of our system. While these tests have served us adequately so far, we recognize the immense benefits that automated tests can bring to our project - specifically integration ones.
+In order to verify our project's expected funcionality we followed a simple and objective thread of manual tests. Those which we considered the most effective in terms of error identification and expected behavior guarantees are listed below:
 
-However, before we start implementing integration tests, it is crucial to establish a solid foundation at the backend layer. Once we have well-defined NodeJS backend layer, we should proceed with the development of automated tests focused on the frontend x backend interaction. These tests will validate the communication and data exchange between the user interface and the underlying system, one of the most flaky interactions in an application's flow.
+Pages
+p1. Home Page:
+   - Verify if all elements (products, images, descriptions) are displayed correctly on the home page.
+   - Check if products load quickly.
+   - Test if links to other pages are functioning correctly.
 
-In summary, while we have relied on simple manual tests for now, although we recognize it's necessary to implement automated integration tests for frontend/backend interfacing. By doing so, we can ensure the stability and reliability of our system.
+p2. Login Page:
+   - Enter valid username and password and verify if login is successful.
+   - Enter invalid username or password and check if appropriate error message is displayed.
+   - Verify if the user is redirected to the correct page after login.
+
+p3. Signup Page:
+   - Enter valid information in the registration fields and check if a new account can be created successfully.
+   - Enter invalid information in the registration fields (e.g., an invalid email address) and verify if the system displays an appropriate error message.
+   - Check if the user is redirected to the correct page after registration.
+
+p4. Logged-in User Data Page:
+   - Verify if user information is correct and up to date.
+   - Test the functionality to edit user data and check if changes are saved correctly.
+   - Verify if the user can log out successfully and is redirected to the login page.
+
+p5. Product Details Page:
+   - Check if all product information is displayed correctly (image, description, price, etc.).
+   - Test the functionality of the sound player to ensure that the product sound can be played correctly.
+   - Verify if the "Add to Cart" button functions correctly, considering the product's stock.
+
+p6. Cart Page:
+   - Add one or more products to the cart and verify if they are displayed correctly.
+   - Test the functionality to remove products from the cart and check if the cart is updated correctly.
+   - Verify if the subtotal, taxes, and total of the cart are calculated correctly.
+
+p7. Payment Screen:
+   - Enter payment information (card number, expiration date, security code) and check if the payment is processed successfully.
+   - Verify if the order details are displayed correctly before making the payment.
+
+p8. Purchase Confirmation Page:
+   - Check if the page displays an appropriate thank you message for the purchase.
+   - Verify if the order details are displayed correctly.
+   - Test if it is possible to return to the home page or navigate to other parts of the site after completing the purchase.
+
+Flows
+
+f1. Happy Path:
+   - Login with mocked admin user data
+   - Add a couple instruments to the cart
+   - Provide mocked payment data
+   - Buy the composed cart
+   - Check if the bought items had their stock number decreased
+
+f2. Signup & Login:
+   - Sign up mocked user
+   - Close and reopen website
+   - Login with provided data
+   - Access user data window and verify if user information matches the previously given one
+
+f3. Product Management:
+   - Login as an admin user
+   - Access profile page and then hit "Gerenciar Produtos" button
+   - Click the plus button at the upper-right corner of the main card
+   - Enter mocked product data and create it
+   - Modify some products data by clicking them and changing any field
+   - Access home page by clicking Banga logo
+   - Verify if the entered product is being displayed correctly
+
+f4. User Management:
+   - Login as an admin user
+   - Access profile page and then hit "Gerenciar Usuários" button
+   - Click the plus button at the upper-right corner of the main card
+   - Enter mocked user data and create it
+   - Modify some users data by clicking them and changing any field
+   - Login in each of the modified accounts and verify the user profile data page
+
+f5. No Stock:
+   - Login with mocked admin user data
+   - Verify how many units of any arbitrary instrument are left to sell
+   - Add all stock of this instrument to the cart
+   - Provide mocked payment data
+   - Buy the composed cart
+   - Check if the bought item's "Adicionar ao Carrinho" in product details screen (accessed through home page) is disabled and now shows "Sem Estoque"
 
 ## Test Results
 
