@@ -65,7 +65,9 @@ export default function Payment() {
             useFormProps={useFormProps}
             required
             name="expirationDate"
-            type="date"
+            type="text"
+            placeholder="mm/aa"
+            maxLenght={5}
           />
 
           <Input
@@ -73,8 +75,9 @@ export default function Payment() {
             useFormProps={useFormProps}
             required
             name="cvv"
-            type="number"
+            type="text"
             placeholder="XXX"
+            maxLenght={3}
           />
         </div>
 

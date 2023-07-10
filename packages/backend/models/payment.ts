@@ -4,7 +4,7 @@ const PaymentSchema: Schema = new Schema({
   userID: { type: String, required: true },
   cardNumber: { type: String, required: true },
   cardholder: { type: String, required: true },
-  expirationDate: { type: Date, required: true },
+  expirationDate: { type: String, required: true },
   cvv: { type: Number, required: true },
   products: [
     {
