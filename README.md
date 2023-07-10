@@ -50,11 +50,11 @@ In addition to the given requirements, this project also has its own requirement
 
 ### Tools used
 
-The project is a complete application that will use React in the front-end, Node and Express in the back-end, and Firebase's document-oriented database as the form of persisting data.
+The project is a complete application that will use React in the front-end, Node and Express in the back-end, and MongoDB document-oriented database as the form of persisting data.
 
 The platform for hosting media assets (such as product images and instrument audio samples) will be Cloudinary.
 
-Both back and front-end will use Jest as their testing framework, while more general tests will be performed using Insomnia.
+Both back and front-end will leverage manual testing as expected behavior assurance, using Postman and Insomnia to do so.
 
 The navigation diagram was made in Draw.io, while the page designs was made in Figma.
 
@@ -104,7 +104,8 @@ Our code respects common organization practices for any React application.
 
 In order to verify our project's expected funcionality we followed a simple and objective thread of manual tests. Those which we considered the most effective in terms of error identification and expected behavior guarantees are listed below:
 
-Pages
+### Pages
+
 p1. Home Page:
    - Verify if all elements (products, images, descriptions) are displayed correctly on the home page.
    - Check if products load quickly.
@@ -144,7 +145,7 @@ p8. Purchase Confirmation Page:
    - Verify if the order details are displayed correctly.
    - Test if it is possible to return to the home page or navigate to other parts of the site after completing the purchase.
 
-Flows
+### Flows
 
 f1. Happy Path:
    - Login with mocked admin user data
