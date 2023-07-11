@@ -25,6 +25,9 @@ export default function ProductBackoffice() {
     getProducts();
   }, []);
 
+  if (products?.length === 0) {
+  }
+
   return (
     <div className={styles.container}>
       <Button onClick={() => navigate('new')} className={styles.addBtn}>
@@ -33,13 +36,19 @@ export default function ProductBackoffice() {
 
       <h1>Produtos</h1>
 
-      <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
-        {productsLoading ? (
-          <Spinner width="30%" height="30%" />
-        ) : (
-          products?.map((product) => <ProductCard to={`${product.id}`} product={product} key={product.id} />)
-        )}
-      </div>
+      {products?.length === 0 ? (
+        <p className="noItemsMessage">Nenhum produto encontrado.</p>
+      ) : (
+        <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
+          {productsLoading ? (
+            <Spinner width="30%" height="30%" />
+          ) : (
+            products?.map((product) => (
+              <ProductCard to={`${product._id}`} product={product} key={product._id} />
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 }

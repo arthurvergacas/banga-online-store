@@ -1,0 +1,3 @@
+export const CLOUDINARY_CLOUD_NAME = 'ds79prxcp';
+export const CLOUDINARY_API_KEY = '562549821511635';
+export const CLOUDINARY_API_SECRET = 'BlayF2WpB-iD33uzYoeWNRONDh4';

@@ -9,6 +9,7 @@ interface InputProps {
   step?: number;
   width?: string;
   autoComplete?: string;
+  maxLenght?: number;
 
   useFormProps: UseFormReturn<any>;
   required?: boolean;
@@ -36,13 +37,16 @@ export default function Input({ useFormProps, ...props }: InputProps) {
             id={props.name}
             step={props.step}
             placeholder={props.placeholder}
+            maxLength={props.maxLenght}
             {...useFormProps.control.register(props.name, {
               required: props.required,
             })}
           />
         </div>
 
-        {controlHasErrors() && props.required && <small className={styles.errorMessage}>Campo obrigatório</small>}
+        {controlHasErrors() && props.required && (
+          <small className={styles.errorMessage}>Campo obrigatório</small>
+        )}
       </label>
     </>
   );

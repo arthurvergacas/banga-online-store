@@ -7,11 +7,24 @@ import Spinner from 'components/Spinner';
 import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
 
-export default function Profile() {
+interface ProfileProps {
+  onLogout: () => void;
+}
+
+export default function Profile({ onLogout }: ProfileProps) {
   const [user, setUser] = useState<User>();
   const [userLoading, setUserLoading] = useState(true);
+  const [userLoggingOut, setUserLoggingOut] = useState(false);
 
   const navigate = useNavigate();
+
+  const logout = async () => {
+    setUserLoggingOut(true);
+    await UserService.logout();
+
+    onLogout();
+    navigate('/');
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -27,7 +40,12 @@ export default function Profile() {
     return (
       <div
         className={styles.container}
-        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
       >
         <Spinner width="5em" height="5em" />
       </div>
@@ -57,8 +75,8 @@ export default function Profile() {
             <div className={styles.profileRow}>
               <span>
                 Data de nascimento:{' '}
-                <time dateTime={new Date(user!.birthDate).toDateString()}>
-                  {new Date(user!.birthDate).toLocaleDateString()}
+                <time dateTime={new Date(`${user!.birthDate}T00:00`).toDateString()}>
+                  {new Date(`${user!.birthDate}T00:00`).toLocaleDateString()}
                 </time>
               </span>
             </div>
@@ -70,12 +88,15 @@ export default function Profile() {
           </section>
         </div>
 
-        {user?.isAdmin && (
-          <div id={styles.adminButtonsContainer}>
-            <Button onClick={() => navigate('/admin/users')}>Gerenciar Contas</Button>
-            <Button onClick={() => navigate('/admin/products')}>Gerenciar Produtos</Button>
-          </div>
-        )}
+        <div className={styles.buttonsContainer}>
+          {user?.isAdmin && (
+            <>
+              <Button onClick={() => navigate('/admin/users')}>Gerenciar Contas</Button>
+              <Button onClick={() => navigate('/admin/products')}>Gerenciar Produtos</Button>
+            </>
+          )}
+          <Button onClick={logout}>{userLoggingOut ? <Spinner height="30px" /> : <>Sair</>}</Button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 export interface Product {
-  id: string;
+  _id: string;
   title: string;
   subtitle: string;
   description: string;
@@ -9,4 +9,11 @@ export interface Product {
   audioUrl: string;
 }
 
-export type ProductRequest = Omit<Product, 'id'>;
+export interface ProductCart extends Product {
+  quantity: number;
+}
+
+export interface ProductRequest extends Omit<Product, 'imageUrl' | 'audioUrl'> {
+  image: FileList;
+  audio: FileList;
+}

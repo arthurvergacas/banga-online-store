@@ -18,12 +18,16 @@ export default function Home() {
     getProducts();
   }, []);
 
+  if (products?.length === 0) {
+    return <p className="noItemsMessage">Nenhum produto encontrado.</p>;
+  }
+
   return (
     <div className="grid" style={{ gridTemplateColumns: productsLoading ? '1fr' : undefined }}>
       {productsLoading ? (
         <Spinner width="30%" height="30%" />
       ) : (
-        products?.map((product) => <ProductCard product={product} key={product.id} />)
+        products?.map((product) => <ProductCard product={product} key={product._id} />)
       )}
     </div>
   );

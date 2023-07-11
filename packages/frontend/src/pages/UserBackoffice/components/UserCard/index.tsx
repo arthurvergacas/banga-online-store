@@ -8,7 +8,7 @@ interface UserProps {
 
 export default function UserCard({ user }: UserProps) {
   return (
-    <Link to={user.id} className={styles.userCard}>
+    <Link to={user._id} className={styles.userCard}>
       <header>
         <h3>{user.name}</h3>
         <h4>{user.email}</h4>

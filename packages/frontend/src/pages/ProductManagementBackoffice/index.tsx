@@ -7,20 +7,59 @@ import ProductService from 'services/productService';
 import Spinner from 'components/Spinner';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import UnderlinedButton from 'components/UnderlinedButton';
 
 export default function ProductManagementBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [productLoading, setProductLoading] = useState(true);
+  const [savingProduct, setSavingProduct] = useState(false);
 
-  const useFormProps = useForm<Product>({ mode: 'all' });
+  const useFormProps = useForm<ProductRequest>({ mode: 'all' });
 
   const { productId } = useParams();
   const navigate = useNavigate();
 
+  const onSubmit = async (data: ProductRequest) => {
+    try {
+      setSavingProduct(true);
+
+      if (productId && productId !== 'new') await ProductService.save(productId, data);
+      else await ProductService.createProduct(data);
+
+      navigate('/admin/products');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingProduct(false);
+    }
+  };
+
+  const deleteProduct = async () => {
+    try {
+      setSavingProduct(true);
+
+      await ProductService.delete(useFormProps.getValues()._id);
+
+      navigate('/admin/products');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingProduct(false);
+    }
+  };
+
   useEffect(() => {
     const populateFormWithProductData = (productData: Product) => {
       for (const key of Object.keys(productData) as (keyof Product)[]) {
-        useFormProps.setValue(key, productData[key]);
+        if (key !== 'imageUrl' && key !== 'audioUrl') {
+          useFormProps.setValue(key, productData[key]);
+        }
       }
     };
 
@@ -43,19 +82,6 @@ export default function ProductManagementBackoffice() {
     else setProductLoading(false);
   }, [productId, navigate, useFormProps]);
 
-  const onSubmit = async (data: Product | ProductRequest) => {
-    console.log(data);
-
-    try {
-      if (productId !== 'new') await ProductService.save(data as Product);
-      else await ProductService.createProduct(data as ProductRequest);
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
-    }
-  };
-
   if (productLoading) {
     return (
       <div className={styles.container} style={{ height: '17em' }}>
@@ -73,7 +99,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Instrumento"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="title"
             type="text"
             placeholder="ex.: Saxofone"
@@ -82,7 +108,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Modelo"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="subtitle"
             type="text"
             placeholder="ex.: Eagle SA500vg"
@@ -93,7 +119,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Preço"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="price"
             type="number"
             step={0.01}
@@ -103,7 +129,7 @@ export default function ProductManagementBackoffice() {
           <Input
             label="Descrição"
             useFormProps={useFormProps}
-            required
+            required={productId === 'new'}
             name="description"
             type="text"
             placeholder="Descrição"
@@ -112,29 +138,42 @@ export default function ProductManagementBackoffice() {
 
         <div className={styles.row}>
           <Input
-            label="Som"
+            label="Imagem"
             useFormProps={useFormProps}
-            required
-            name="imageUrl"
+            required={productId === 'new'}
+            name="image"
             type="file"
-            placeholder="XX/XX/XXXX"
           />
 
           <Input
-            label="Foto"
+            label="Áudio"
             useFormProps={useFormProps}
-            required
-            name="audioUrl"
+            required={productId === 'new'}
+            name="audio"
             type="file"
-            placeholder="Rua; número; cidade; estado"
           />
         </div>
 
         <div className={styles.row} style={{ justifyContent: 'center' }}>
-          <Input label="Estoque" useFormProps={useFormProps} required name="stock" type="number" placeholder="XX" />
+          <Input
+            label="Estoque"
+            useFormProps={useFormProps}
+            required={productId === 'new'}
+            name="stock"
+            type="number"
+            placeholder="XX"
+          />
         </div>
 
-        <Button type="submit">Salvar</Button>
+        <Button type="submit" disabled={savingProduct} className={styles.saveButton}>
+          {savingProduct ? <Spinner height="30px" /> : <>Salvar</>}
+        </Button>
+
+        {productId !== 'new' && (
+          <UnderlinedButton className={styles.deleteButton} onClick={deleteProduct}>
+            Deletar Produto
+          </UnderlinedButton>
+        )}
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>

@@ -5,17 +5,53 @@ import { User } from '@banga/types/user';
 import { useEffect, useState } from 'react';
 import Button from 'components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
-import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
+import UnderlinedButton from 'components/UnderlinedButton';
+import ProfileService from 'services/profileService';
 
 export default function EditUserBackoffice() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [userLoading, setUserLoading] = useState(true);
+  const [savingUser, setSavingUser] = useState(false);
 
   const useFormProps = useForm<User>({ mode: 'all' });
 
   const { userId } = useParams();
   const navigate = useNavigate();
+
+  const onSubmit = async (data: User) => {
+    try {
+      setSavingUser(true);
+
+      await ProfileService.save(data);
+
+      navigate('/admin/users');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingUser(false);
+    }
+  };
+
+  const deleteUser = async () => {
+    try {
+      setSavingUser(true);
+
+      await ProfileService.delete(useFormProps.getValues()._id);
+
+      navigate('/admin/users');
+      return;
+    } catch (e) {
+      if (e instanceof Error) {
+        setErrorMessage(e.message);
+      }
+    } finally {
+      setSavingUser(false);
+    }
+  };
 
   useEffect(() => {
     const populateFormWithUserData = (userData: User) => {
@@ -27,7 +63,7 @@ export default function EditUserBackoffice() {
     const getUser = async () => {
       if (userId) {
         setUserLoading(true);
-        const fetchedUser = await UserService.getById(userId);
+        const fetchedUser = await ProfileService.getById(userId);
 
         if (fetchedUser == null) {
           navigate('/admin/users');
@@ -42,16 +78,6 @@ export default function EditUserBackoffice() {
     getUser();
   }, [userId, navigate, useFormProps]);
 
-  const onSubmit = async (data: User) => {
-    try {
-      await UserService.save(data);
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      }
-    }
-  };
-
   if (userLoading) {
     return (
       <div className={styles.container} style={{ height: '17em' }}>
@@ -60,11 +86,15 @@ export default function EditUserBackoffice() {
     );
   }
 
-  // TODO isAdmin checkbox
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={useFormProps.handleSubmit(onSubmit)}>
         <h1>Editar Usuário</h1>
+
+        <label htmlFor="isAdmin" className={styles.isAdminLabel}>
+          Admin
+          <input type="checkbox" id="isAdmin" {...useFormProps.register('isAdmin')} />
+        </label>
 
         <div className={styles.row}>
           <Input
@@ -77,11 +107,25 @@ export default function EditUserBackoffice() {
             autoComplete="new-password"
           />
 
-          <Input label="CPF" useFormProps={useFormProps} required name="cpf" type="text" placeholder="XXX.XXX.XXX-XX" />
+          <Input
+            label="CPF"
+            useFormProps={useFormProps}
+            required
+            name="cpf"
+            type="text"
+            placeholder="XXX.XXX.XXX-XX"
+          />
         </div>
 
         <div className={styles.row}>
-          <Input label="RG" useFormProps={useFormProps} required name="rg" type="text" placeholder="XX.XXX.XXX-X" />
+          <Input
+            label="RG"
+            useFormProps={useFormProps}
+            required
+            name="rg"
+            type="text"
+            placeholder="XX.XXX.XXX-X"
+          />
 
           <Input
             label="Email"
@@ -124,7 +168,13 @@ export default function EditUserBackoffice() {
           />
         </div>
 
-        <Button type="submit">Salvar</Button>
+        <Button type="submit" disabled={savingUser} className={styles.saveButton}>
+          {savingUser ? <Spinner height="30px" /> : <>Salvar</>}
+        </Button>
+
+        <UnderlinedButton className={styles.deleteButton} onClick={deleteUser}>
+          Deletar Usuário
+        </UnderlinedButton>
 
         {errorMessage && <span className={styles.errorMessage}>{errorMessage}</span>}
       </form>

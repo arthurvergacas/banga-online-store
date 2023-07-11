@@ -1,12 +1,13 @@
-import { Payment as PaymentType } from '@banga/types/payment';
+import { PaymentInfo as PaymentType } from '@banga/types/payment';
 import Input from 'components/Input';
 import styles from './Payment.module.css';
 import { useForm } from 'react-hook-form';
 import Button from 'components/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import paymentService from 'services/paymentService';
+import PaymentService from 'services/paymentService';
 import Spinner from 'components/Spinner';
+import CartService from 'services/cartService';
 
 export default function Payment() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -19,17 +20,18 @@ export default function Payment() {
   const onSubmit = async (data: PaymentType) => {
     try {
       setIsLoadingPayment(true);
-      await paymentService.pay(data);
-      setIsLoadingPayment(false);
+
+      await PaymentService.pay(data, CartService.getAll());
+
+      CartService.clearCart();
+      navigate('/checkout');
     } catch (e) {
       if (e instanceof Error) {
         setErrorMessage(e.message);
       }
-
-      return;
+    } finally {
+      setIsLoadingPayment(false);
     }
-
-    navigate('/checkout');
   };
 
   return (
@@ -58,9 +60,25 @@ export default function Payment() {
         </div>
 
         <div className={styles.row}>
-          <Input label="Validade" useFormProps={useFormProps} required name="expirationDate" type="date" />
+          <Input
+            label="Validade"
+            useFormProps={useFormProps}
+            required
+            name="expirationDate"
+            type="text"
+            placeholder="mm/aa"
+            maxLenght={5}
+          />
 
-          <Input label="CVV" useFormProps={useFormProps} required name="cvv" type="number" placeholder="XXX" />
+          <Input
+            label="CVV"
+            useFormProps={useFormProps}
+            required
+            name="cvv"
+            type="text"
+            placeholder="XXX"
+            maxLenght={3}
+          />
         </div>
 
         <Button type="submit">

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from './UserBackoffice.module.css';
 import UserCard from './components/UserCard';
 import { User } from '@banga/types/user';
-import UserService from 'services/userService';
 import Spinner from 'components/Spinner';
+import ProfileService from 'services/profileService';
 
 export default function UserBackoffice() {
   const [users, setUsers] = useState<User[]>();
@@ -12,7 +12,7 @@ export default function UserBackoffice() {
   useEffect(() => {
     const getUsers = async () => {
       setUsersLoading(true);
-      setUsers(await UserService.getAll());
+      setUsers(await ProfileService.getAll());
       setUsersLoading(false);
     };
 
@@ -27,7 +27,7 @@ export default function UserBackoffice() {
         {usersLoading ? (
           <Spinner width="30%" height="30%" />
         ) : (
-          users?.map((user) => <UserCard user={user} key={user.id} />)
+          users?.map((user) => <UserCard user={user} key={user._id} />)
         )}
       </div>
     </div>

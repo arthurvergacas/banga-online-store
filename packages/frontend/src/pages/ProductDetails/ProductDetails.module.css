@@ -71,6 +71,7 @@
   object-fit: contain;
   object-position: top;
   height: fit-content;
+  max-height: 30rem;
   border-radius: 15px;
 }
 
@@ -86,6 +87,7 @@
 
 #productContent > div:first-child {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
 

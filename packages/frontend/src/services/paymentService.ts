@@ -1,10 +1,11 @@
-import { Payment } from '@banga/types/payment';
-import sleep from './sleep';
+import { PaymentRequest, PaymentInfo } from '@banga/types/payment';
+import { ProductCart } from '@banga/types/product';
+import api from './api';
 
-const paymentService = {
-  pay: async (paymentData: Payment) => {
-    await sleep();
+const PaymentService = {
+  pay: async (paymentInfo: PaymentInfo, products: ProductCart[]): Promise<void> => {
+    return api.post<void, void, PaymentRequest>('/payments', { ...paymentInfo, products });
   },
 };
 
-export default paymentService;
+export default PaymentService;
