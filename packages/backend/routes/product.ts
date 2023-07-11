@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 
 import Product from '../models/product';
 
@@ -9,13 +8,6 @@ import { upload } from '../file-upload/multer';
 
 
 var router = express.Router();
-const app = express();
-app.use(express.json());
-app.use(
-  cors({
-    origin: '*',
-  })
-);
 
 // Fetch all products
 router.get('/products', async (req, res) => {

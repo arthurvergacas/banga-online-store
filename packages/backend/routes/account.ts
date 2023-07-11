@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 
 import User from '../models/user';
 import Login from '../models/login';
@@ -7,13 +6,6 @@ import Login from '../models/login';
 import { guardedRoute } from '../middlewares/authGuard';
 
 var router = express.Router();
-const app = express();
-app.use(express.json());
-app.use(
-  cors({
-    origin: '*',
-  })
-);
 
 // Fetch all users' profiles
 router.get('/users', guardedRoute({ adminOnly: true }), async (req, res) => {

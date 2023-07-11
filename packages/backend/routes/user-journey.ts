@@ -1,6 +1,5 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import cors from 'cors';
 
 import User from '../models/user';
 import Payment from '../models/payment';
@@ -14,13 +13,6 @@ import { guardedRoute } from '../middlewares/authGuard';
 import { JWT_SECRET } from '../constants/authConstants';
 
 var router = express.Router();
-const app = express();
-app.use(express.json());
-app.use(
-  cors({
-    origin: '*',
-  })
-);
 
 // Add payment details to already existing user by user ID
 router.post('/payments/', guardedRoute(), async (req, res) => {
