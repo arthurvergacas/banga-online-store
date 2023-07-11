@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:frontend": "npm start -w @banga/frontend",
+    "build:frontend": "npm run build -w @banga/frontend",
     "start:backend": "npm start -w @banga/backend"
   },
   "repository": {
