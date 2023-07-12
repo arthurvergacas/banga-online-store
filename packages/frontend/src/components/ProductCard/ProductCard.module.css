@@ -9,7 +9,7 @@
   justify-content: space-between;
 
   height: 15em;
-  aspect-ratio: 7 / 5;
+  width: 21em;
   max-width: 100%;
   max-height: 100%;
 
@@ -37,6 +37,10 @@
 
 .productCard h3 {
   font-weight: 600;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .productCard h4 {
@@ -54,8 +58,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 1rem;
 
   width: 100%;
+}
+
+.productCard header > div {
+  overflow: hidden;
 }
 
 .productImageSpinnerContainer {
